@@ -1,0 +1,4 @@
+LIBRARY wphfmon
+
+EXPORTS
+	InitializePrintMonitor2

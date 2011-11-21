@@ -1,0 +1,184 @@
+*%%%--------------------------------------------------------------------
+*%%% FEATURE NAMES
+*%%%--------------------------------------------------------------------
+*Macros: FeatureNames
+{
+    DL_MEMORY_CAPACITY_DISPLAY:             RESDLL.DLUPUI.1001
+    DL_RAM_DISK_DISPLAY:                    RESDLL.DLUPUI.1002
+    DL_DUPLEX_DISPLAY:                      RESDLL.DLUPUI.1003
+    DL_OPTION_TRAY_MODULE_DISPLAY:          RESDLL.DLUPUI.1004
+    DL_500_SHEET_TRAY_MODULE_DISPLAY:       RESDLL.DLUPUI.1007
+    DL_1000_SHEET_TRAY_MODULE_DISPLAY:      RESDLL.DLUPUI.1008
+    DL_OPTION_TRAY1_MODULE_DISPLAY:         RESDLL.DLUPUI.1009
+    DL_OPTION_TRAY2_MODULE_DISPLAY:         RESDLL.DLUPUI.1010
+    DL_ORIENTATION_DISPLAY:                 RESDLL.DLUPUI.1011
+    DL_PRINT_ON_BOTH_SIDES_DISPLAY:         RESDLL.DLUPUI.1012
+    DL_PAPER_SOURCE_DISPLAY:                RESDLL.DLUPUI.1015
+    DL_MEDIA_DISPLAY:                       RESDLL.DLUPUI.1016
+    DL_COLOR_DISPLAY:                       RESDLL.DLUPUI.1017
+    DL_PAPERSIZE_DISPLAY:                   RESDLL.DLUPUI.1018
+    DL_PRINT_QUALITY_DISPLAY:               RESDLL.DLUPUI.1020
+    DL_IE_DISPLAY:                          RESDLL.DLUPUI.1022
+    DL_COLLATE_DISPLAY:                     RESDLL.DLUPUI.1023
+    DL_MPFORIENTATION_DISPLAY:              RESDLL.DLUPUI.1028
+    DL_DRAFTMODE_DISPLAY:                   RESDLL.DLUPUI.1029
+    DL_BITMAPSMOOTHING_DISPLAY:             RESDLL.DLUPUI.1030
+    DL_IMGENHANCEMENT_DISPLAY:              RESDLL.DLUPUI.1031
+    DL_TRAPPING_DISPLAY:                    RESDLL.DLUPUI.1032
+    DL_PRINTMODE_DISPLAY:                   RESDLL.DLUPUI.1033
+    DL_MPFMEDIATYPE_DISPLAY:                RESDLL.DLUPUI.1034
+    DL_550_SHEET_FEEDER_DISPLAY:            RESDLL.DLUPUI.1040
+    DL_DUPLEXER_DISPLAY:                    RESDLL.DLUPUI.1041
+}
+
+
+*%%%--------------------------------------------------------------------
+*%%% DEVICE SETTINGS PROPERTY
+*%%%--------------------------------------------------------------------
+*Macros: MemoryCapacityNames
+{
+    DL_64MB_DISPLAY:                        RESDLL.DLUPUI.1101
+    DL_128MB_DISPLAY:                       RESDLL.DLUPUI.1102
+    DL_192MB_DISPLAY:                       RESDLL.DLUPUI.1103
+    DL_256MB_DISPLAY:                       RESDLL.DLUPUI.1104
+    DL_320MB_DISPLAY:                       RESDLL.DLUPUI.1105
+    DL_384MB_DISPLAY:                       RESDLL.DLUPUI.1106
+    DL_576MB_DISPLAY:                       RESDLL.DLUPUI.1107
+    DL_640MB_DISPLAY:                       RESDLL.DLUPUI.1108
+    DL_1152MB_DISPLAY:                      RESDLL.DLUPUI.1109
+}
+
+*Macros: Available
+{
+    DL_NOT_AVAILABLE_DISPLAY:               RESDLL.DLUPUI.1201
+    DL_AVAILABLE_DISPLAY:                   RESDLL.DLUPUI.1202
+}
+
+*Macros: OnOff
+{
+    DL_ON_DISPLAY:                          RESDLL.DLUPUI.1301
+    DL_OFF_DISPLAY:                         RESDLL.DLUPUI.1302
+}
+
+*Macros: AvailableNames
+{
+    DL_NOT_AVAILABLE_DISPLAY:               RESDLL.DLUPUI.1201
+    DL_AVAILABLE_DISPLAY:                   RESDLL.DLUPUI.1202
+}
+
+*Macros: OnOffNames
+{
+    DL_ON_DISPLAY:                          RESDLL.DLUPUI.1301
+    DL_OFF_DISPLAY:                         RESDLL.DLUPUI.1302
+}
+
+*%%%--------------------------------------------------------------------
+*%%% PAPER/QUALITY PROPERTY
+*%%%--------------------------------------------------------------------
+*Macros: PaperSource
+{
+    DL_PAPERSOURCE_AUTO_DISPLAY:            RESDLL.DLUPUI.1701
+    DL_PAPERSOURCE_TRAY1_DISPLAY:           RESDLL.DLUPUI.1702
+    DL_PAPERSOURCE_TRAY1_A4_LTR_DISPLAY:    RESDLL.DLUPUI.1703
+    DL_PAPERSOURCE_TRAY1_LEGAL_DISPLAY:     RESDLL.DLUPUI.1704
+    DL_PAPERSOURCE_TRAY2_DISPLAY:           RESDLL.DLUPUI.1705
+    DL_PAPERSOURCE_TRAY2_A4_LTR_DISPLAY:    RESDLL.DLUPUI.1706
+    DL_PAPERSOURCE_TRAY2_LEGAL_DISPLAY:     RESDLL.DLUPUI.1707
+    DL_PAPERSOURCE_TRAY2_500SHEETS_DISPLAY: RESDLL.DLUPUI.1708
+    DL_PAPERSOURCE_TRAY3_DISPLAY:           RESDLL.DLUPUI.1709
+    DL_PAPERSOURCE_TRAY4_DISPLAY:           RESDLL.DLUPUI.1710
+    DL_PAPERSOURCE_MPF_DISPLAY:             RESDLL.DLUPUI.1711
+}
+
+*Macros: MediaNames
+{
+    DL_PLAIN1_DISPLAY:                      RESDLL.DLUPUI.1802
+    DL_PLAIN1_SIDE2_DISPLAY:                RESDLL.DLUPUI.1803
+    DL_PLAIN2_DISPLAY:                      RESDLL.DLUPUI.1804
+    DL_PLAIN2_SIDE2_DISPLAY:                RESDLL.DLUPUI.1805
+    DL_COVERS1_DISPLAY:                     RESDLL.DLUPUI.1806
+    DL_COVERS1_SIDE2_DISPLAY:               RESDLL.DLUPUI.1807
+    DL_COVERS2_DISPLAY:                     RESDLL.DLUPUI.1808
+    DL_COVERS2_SIDE2_DISPLAY:               RESDLL.DLUPUI.1809
+    DL_TRANSPARENCY_DISPLAY:                RESDLL.DLUPUI.1810
+    DL_LABEL_DISPLAY:                       RESDLL.DLUPUI.1811
+    DL_COATEDPAPER1_DISPLAY:                RESDLL.DLUPUI.1812
+    DL_COATEDPAPER1_SIDE2_DISPLAY:          RESDLL.DLUPUI.1813
+    DL_COATEDPAPER2_DISPLAY:                RESDLL.DLUPUI.1814
+    DL_COATEDPAPER2_SIDE2_DISPLAY:          RESDLL.DLUPUI.1815
+    DL_ENVELOPE_DISPLAY:                    RESDLL.DLUPUI.1816
+    DL_PLAIN_DISPLAY:                       RESDLL.DLUPUI.1820
+    DL_PLAIN_SIDE2_DISPLAY:                 RESDLL.DLUPUI.1821
+    DL_PLAIN_THICK_DISPLAY:                 RESDLL.DLUPUI.1822
+    DL_PLAIN_THICK_SIDE2_DISPLAY:           RESDLL.DLUPUI.1823
+    DL_COVERS_DISPLAY:                      RESDLL.DLUPUI.1824
+    DL_COVERS_SIDE2_DISPLAY:                RESDLL.DLUPUI.1825
+    DL_COVERS_THICK_DISPLAY:                RESDLL.DLUPUI.1826
+    DL_COVERS_THICK_SIDE2_DISPLAY:          RESDLL.DLUPUI.1827
+    DL_COATED_DISPLAY:                      RESDLL.DLUPUI.1828
+    DL_COATED_SIDE2_DISPLAY:                RESDLL.DLUPUI.1829
+    DL_COATED_THICK_DISPLAY:                RESDLL.DLUPUI.1830
+    DL_COATED_THICK_SIDE2_DISPLAY:          RESDLL.DLUPUI.1831
+    DL_RECYCLED_DISPLAY:                    RESDLL.DLUPUI.1832
+    DL_RECYCLED_SIDE2_DISPLAY:              RESDLL.DLUPUI.1833
+    DL_JAPANESE_COATED_DISPLAY:             RESDLL.DLUPUI.1834
+    DL_JAPANESE_COATED_SIDE2_DISPLAY:       RESDLL.DLUPUI.1835
+    DL_JAPANESE_POSTCARD_DISPLAY:           RESDLL.DLUPUI.1836
+    DL_JAPANESE_POSTCARD_SIDE2_DISPLAY:     RESDLL.DLUPUI.1837
+}
+
+*Macros: ColorModeNames
+{
+    DL_MONO_DISPLAY:                        RESDLL.DLUPUI.1901
+    DL_TRUECOLOR_DISPLAY:                   RESDLL.DLUPUI.1902
+}
+
+*Macros: PaperSizes
+{
+    DL_PAPERSIZE_YOUKEI2_DISPLAY:           RESDLL.DLUPUI.1920
+    DL_PAPERSIZE_YOUKEI3_DISPLAY:           RESDLL.DLUPUI.1921
+    DL_PAPERSIZE_YOUKEI4_DISPLAY:           RESDLL.DLUPUI.1922
+    DL_PAPERSIZE_YOUCHOUKEI3_DISPLAY:       RESDLL.DLUPUI.1923
+}
+
+*Macros: PrintQualityNames
+{
+    DL_AUTO_QUALITY_DISPLAY:                RESDLL.DLUPUI.2101
+    DL_600DPI_QUALITY_DISPLAY:              RESDLL.DLUPUI.2102
+    DL_300DPI_QUALITY_DISPLAY:              RESDLL.DLUPUI.2103
+    DL_200DPI_QUALITY_DISPLAY:              RESDLL.DLUPUI.2104
+}
+
+*%%%--------------------------------------------------------------------
+*%%% ADVANCED PROPERTY
+*%%%--------------------------------------------------------------------
+*Macros: MPFOrientation
+{
+    DL_PORTRAIT_DISPLAY:                    RESDLL.DLUPUI.2201
+    DL_LANDSCAPE_DISPLAY:                   RESDLL.DLUPUI.2202
+}
+
+*Macros: ImageEnhancement
+{
+    DL_ENABLE_DISPLAY:                      RESDLL.DLUPUI.2301
+    DL_DISABLE_DISPLAY:                     RESDLL.DLUPUI.2302
+}
+
+*Macros: PrintMode
+{
+    DL_HIGHSPEED_DISPLAY:                   RESDLL.DLUPUI.2401
+    DL_HIGHQUALITY_DISPLAY:                 RESDLL.DLUPUI.2402
+    DL_HIGHRESOLUTION_DISPLAY:              RESDLL.DLUPUI.2403
+}
+
+*Macros: PrintOnBothSides
+{
+    DL_DUPLEX_NONE_DISPLAY:                 RESDLL.DLUPUI.2501
+    DL_DUPLEX_LONG_DISPLAY:                 RESDLL.DLUPUI.2502
+    DL_DUPLEX_SHORT_DISPLAY:                RESDLL.DLUPUI.2503
+}
+
+*Macros: RcidDmpaperSystemName
+{
+    RCID_DMPAPER_SYSTEM_NAME:               0x7fffffff
+}

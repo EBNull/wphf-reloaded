@@ -1,0 +1,1878 @@
+*%******************************************************************************************
+*%				 GPD file for Dell Laser Printer 5310n
+*%******************************************************************************************
+*GPDSpecVersion: "1.0"
+*GPDFileVersion: "1.0"
+*Include: "StdNames.gpd"
+*Include: "ttfsub.gpd"
+*Include: "P6DISP.GPD"
+*Include: "P6FONT.GPD"
+*Include: "PCLXL.GPD"
+*Include: "PJL.GPD"
+*Include: "lxxlmac.gpd"	*% MACROs
+*Personality: =PERSONALITY_PCLXL
+*GPDFileName: "DKAATB51.gpd"
+*ModelName: "Dell Laser Printer 5310n (MS)"
+*MasterUnits: PAIR(1200, 1200)
+*ResourceDLL: "lxxlres.dll"
+*PrinterType: PAGE
+*MaxCopies: 32767
+*PrintRate: 50
+*PrintRateUnit: PPM
+*PrintRatePPM: 50
+*Macros: PCLXLCommand
+{
+PCLXL_StreamHeader: ") HP-PCL XL;3;0;Comment Copyright(c) 1999 Microsoft Corporation<0A>"
+
+PCLXL_OpenDataSource: =ubyte "<00>" =attr_ubyte =SourceType =ubyte "<01>" =attr_ubyte =DataOrg =OpenDataSource
+
+*% *******************************************************************************
+*% BeginSession
+*%     Measure(ubyte) & UnitsPerMeasure(uint16_xy) & {ErrorReport(ubyte)}
+*% *******************************************************************************
+PCLXL_BeginSession1200: =uint16_xy "<b004b004>" =attr_ubyte =UnitsPerMeasure =ubyte
++ =eInch =attr_ubyte =Measure =ubyte =eBackChAndErrPage =attr_ubyte =ErrorReport =BeginSession
+
+PCLXL_BeginSession600: =uint16_xy "<58025802>" =attr_ubyte =UnitsPerMeasure =ubyte
++ =eInch =attr_ubyte =Measure =ubyte =eBackChAndErrPage =attr_ubyte =ErrorReport =BeginSession
+
+PCLXL_BeginSession300: =uint16_xy "<2c012c01>" =attr_ubyte =UnitsPerMeasure =ubyte
++ =eInch =attr_ubyte =Measure =ubyte =eBackChAndErrPage =attr_ubyte =ErrorReport =BeginSession
+
+Width: %m{ RasterDataWidthInBytes }
+Height: %m{ RasterDataHeightInPixels }
+DataSize: %l{ NumOfDataBytes }
+FntHeight: %l{ FontHeight*600/TextYRes }
+FntNextGlyph: %l{ NextGlyph }
+
+*% *******************************************************************************
+*% BeginRaster
+*%     ColorDepth(ubyte) & ColorMapping(ubyte) & SourceWidth(uint16) &  SourceWidth(uint16) & SourceHeight(uint16)
+*% *******************************************************************************
+PCLXL_CmdBeginRaster: =ubyte =e1Bit =attr_ubyte =ColorDepth
++                     =ubyte =eDirectPixel =attr_ubyte =ColorMapping
++                     =uint16 =Width =attr_ubyte =SourceWidth
++                     =uint16 =Height =attr_ubyte =SourceHeight
++                     =uint16_xy =Width =Height =attr_ubyte =DestinationSize
++                     =BeginImage
++                     =ubyte =eNoCompression =attr_ubyte =CompressMode
++                     =ubyte "<00>" =attr_ubyte =StartLine
++                     =uint16 =Height =attr_ubyte =BlockHeight
++                     =ReadImage
+
+PCLXL_CmdSendBlockData: =dataLength =DataSize "<0000>"
+
+DestinationX: %l{DestX}
+DestinationY: %l{DestY}
+DestinationXRel: %l{DestYRel}
+DestinationYRel: %l{DestXRel}
+NumOfCopy: %l{NumOfCopies}
+PrintDir: %l{PrintDirInCCDegrees}
+FntName: =ubyte_array =uint16 "<1000>" "MS PCLXLFont " %3d{CurrentFontID}
+}
+*%******************************************************************************************
+*%    					Doc setup commands
+*%******************************************************************************************
+*Command: CmdStartJob
+{
+    *Order:JOB_SETUP.1
+    *CallbackID:1002
+    *Params:LIST(NumOfCopies,PhysPaperLength,PhysPaperWidth)
+}
+*Command: CmdStartPage
+{
+    *Order: PAGE_SETUP.5
+    *Cmd: =real32_xy "<0000803f><0000803f>" =attr_ubyte =PageScale =SetPageScale
++    =ubyte =eGray =attr_ubyte =ColorSpace =SetColorSpace
+}
+*Command: CmdEndPage
+{
+    *Order: PAGE_FINISH.1
+    *CallbackID:1001
+    *Params:LIST(NumOfCopies)
+}
+*Command: CmdEndJob
+{
+    *Order: JOB_FINISH.1
+    *Cmd: =CloseDataSource =EndSession =PJL_ENDJOB
+}
+*%******************************************************************************************
+*%      				Installable Options
+*%******************************************************************************************
+*%
+*Feature: Tray2
+{
+    *rcNameID: 280
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 307	*% Not Installed %*
+    }
+    *Option: 2True250
+    {
+        *rcNameID: 288	*% 250-Sheet Drawer %*
+        *OptionID: 288
+    } 
+    *Option: 2True500
+    {
+        *rcNameID: 289	*% 500-Sheet Tray %*
+        *OptionID: 289
+    }    
+    
+}
+*Feature: Tray3
+{
+    *rcNameID: 281
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 307	*% Not Installed %*
+    }
+    *Option: 3True250
+    {
+        *rcNameID: 288	*% 250-Sheet Drawer %*
+        *OptionID: 288
+    } 
+    *Option: 3True500
+    {
+        *rcNameID: 289	*% 500-Sheet Tray %*
+        *OptionID: 289
+    }    
+    
+}
+*Feature: Tray4
+{
+    *rcNameID: 282
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 307	*% Not Installed %*
+    }
+    *Option: 4True250
+    {
+        *rcNameID: 288	*% 250-Sheet Drawer %*
+        *OptionID: 288
+    } 
+    *Option: 4True500
+    {
+        *rcNameID: 289	*% 500-Sheet Tray %*
+        *OptionID: 289
+    }
+    
+}
+
+*Feature: Tray5
+{
+    *rcNameID: 283
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 307	*% Not Installed %*
+    }
+    *Option: 5True250
+    {
+        *rcNameID: 288	*% 250-Sheet Drawer %*
+        *OptionID: 288
+    } 
+    *Option: 5True500
+    {
+        *rcNameID: 289	*% 500-Sheet Drawer %*
+        *OptionID: 289
+    }
+    
+}
+
+*Feature: EnvFeed
+{
+    *rcNameID: 287    *% "Envelope Feeder" %*
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 307	*% Not Installed %*
+      *OptionID: 307
+    }
+    *Option: True
+    {
+      *rcNameID: 308	*% Installed %*
+      *OptionID: 308
+    }
+}
+
+*%******************************************************************************************
+*%      			Number of Output Bins
+*%******************************************************************************************
+*Feature: OutputBins
+{
+    *rcNameID: 328	*% "Number of Output Bins" %*
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+      *rcNameID: 329	*% Standard Bin Only %*
+      *OptionID: 329
+    }
+    *Option: 1Bin
+    {
+      *rcNameID: 330	*% 1-Output Expander %*
+      *OptionID: 330
+    }
+    *Option: 2Bin
+    {
+      *rcNameID: 333	*% 2-2 Output Expander %*
+      *OptionID: 333
+    }
+    *Option: 3Bin
+    {
+      *rcNameID: 336	*% 3 - 3 Output Expanders %*
+      *OptionID: 336
+    }
+    
+}
+*%******************************************************************************************
+*%      				Duplexer
+*%******************************************************************************************
+*Feature: DuplexUnit
+{
+    *rcNameID: 306	*% Duplex Option %*
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: FALSE
+    *Option: FALSE
+    {
+        *rcNameID: 307	*% Not Installed %*
+        *DisabledFeatures: LIST(Duplex.VERTICAL, Duplex.HORIZONTAL)
+    }
+    *Option: TRUE
+    {
+        *rcNameID: 308	*% Installed %*
+    }
+}
+
+*%******************************************************************************************
+*%      				Flash Memory
+*%******************************************************************************************
+*%******************************************************************************************
+*%      				Hard Disk
+*%******************************************************************************************
+*Feature: HardDisk
+{
+    *rcNameID: 304	*% Printer Hard Disk %*
+    *FeatureType: PRINTER_PROPERTY
+    *DefaultOption: False
+    *Option: False
+    {
+        *rcNameID: 307	*% Not Installed %*
+    }
+    *Option: True
+    {
+        *rcNameID: 308	*% Installed %*
+    }
+}
+*%******************************************************************************************
+*%      				Memory
+*%******************************************************************************************
+*Feature: Memory
+{
+    *rcNameID: =PRINTER_MEMORY_DISPLAY
+    *DefaultOption: 131072KB
+    
+    *Option: 131072KB
+    {
+        *Name: "128MB"
+        *MemoryConfigKB: PAIR(131072, 131072)
+    }    
+    
+    *Option: 262144KB
+    {
+        *Name: "256MB"
+        *MemoryConfigKB: PAIR(262144, 262144)
+    }    
+    
+    *Option: 393216KB
+    {
+        *Name: "384MB"
+        *MemoryConfigKB: PAIR(393216, 393216)
+    }
+    
+    *Option: 655360KB
+    {
+        *Name: "640MB"
+        *MemoryConfigKB: PAIR(655360, 655360)
+    } 
+}
+*%******************************************************************************************
+*%      				Constraints
+*%******************************************************************************************
+*% Tray Feature is disabled if Tray is "Not Installed"
+*InvalidCombination: LIST(Tray2.False, InputBin.Tray2)
+*InvalidCombination: LIST(Tray3.False, InputBin.Tray3)
+*InvalidCombination: LIST(Tray4.False, InputBin.Tray4)
+*InvalidCombination: LIST(Tray5.False, InputBin.Tray5)
+*InvalidCombination: LIST(EnvFeed.False, InputBin.EnvFeed)*% No. of Bins available will depend on the type of Media Destination installed
+*InvalidCombination: LIST(OutputBins.False, OutputBin.Bin1)
+*InvalidCombination: LIST(OutputBins.False, OutputBin.Bin2)
+*InvalidCombination: LIST(OutputBins.False, OutputBin.Bin3)
+
+
+*%Bin1 is only available when outputBins is 1Bin
+*InvalidCombination: LIST(OutputBins.1Bin, OutputBin.Bin2)
+*InvalidCombination: LIST(OutputBins.1Bin, OutputBin.Bin3)
+
+*%Bin1 and Bin2 are only available when outputBins is 2Bin
+*InvalidCombination: LIST(OutputBins.2Bin, OutputBin.Bin3)
+
+
+*% Env cannot be fed from Tray1
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Tray1, PaperSize.ENV_B5)
+
+*% Env cannot be fed from Tray2
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Tray2, PaperSize.ENV_B5)
+
+
+
+*% Env cannot be fed from Tray3
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Tray3, PaperSize.ENV_B5)
+
+*% Env cannot be fed from Tray4
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Tray4, PaperSize.ENV_B5)
+
+*% Env cannot be fed from Tray5
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Tray5, PaperSize.ENV_B5)
+
+*% Env cannot be fed from Manual Paper
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_9)
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_10)
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_DL)
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_C5)
+*InvalidCombination: LIST(InputBin.Manual, PaperSize.ENV_B5)
+
+*% Non-envelope papers cannot be fed from Manual Envelope
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.LETTER)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.LEGAL)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.A4)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.A5)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.EXECUTIVE)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.B5)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.FOLIO)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.STATEMENT)
+*InvalidCombination: LIST(InputBin.ManualEnv, PaperSize.CUSTOMSIZE)
+
+% Non-envelope papers cannot be fed from  Envelope Feeder
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.LETTER)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.LEGAL)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.A4)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.A5)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.EXECUTIVE)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.B5)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.FOLIO)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.STATEMENT)
+*InvalidCombination: LIST(InputBin.EnvFeed, PaperSize.CUSTOMSIZE)
+
+
+*% Manual Envelope does not support media types other than envelope and custom types
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.STANDARD)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.BOND)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.TRANSPARENCY)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.CARDSTOCK)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.COLORED)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.PREPRINTED)
+*InvalidCombination: LIST(InputBin.ManualEnv, MediaType.LETTERHEAD)
+
+*% Manual Envelope does not support media types other than envelope and custom types
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.STANDARD)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.BOND)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.TRANSPARENCY)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.CARDSTOCK)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.COLORED)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.PREPRINTED)
+*InvalidCombination: LIST(InputBin.EnvFeed, MediaType.LETTERHEAD)
+
+
+*% Tray3 cannot be installed unless Tray2 is installed
+*InvalidCombination: LIST(Tray2.False, Tray3.3True250)
+*InvalidCombination: LIST(Tray2.False, Tray3.3True500)
+
+
+*% Tray4 cannot be installed unless Tray3 is installed
+*InvalidCombination: LIST(Tray3.False, Tray4.4True250)
+*InvalidCombination: LIST(Tray3.False, Tray4.4True500)
+
+
+
+*% Tray5 cannot be installed unless Tray4 is installed
+*InvalidCombination: LIST(Tray4.False, Tray5.5True250)
+*InvalidCombination: LIST(Tray4.False, Tray5.5True500)
+
+
+
+*% Tray3 cannot be installed  when Tray2 is 2000-Sheet Tray
+*%InvalidCombination: LIST(Tray2.2True2000, Tray3.3True250)
+*%InvalidCombination: LIST(Tray2.2True2000, Tray3.3True500)
+
+*% Tray4 cannot be installed  when Tray3 is 2000-Sheet Tray
+*%InvalidCombination: LIST(Tray3.3True2000, Tray4.4True250)
+*%InvalidCombination: LIST(Tray3.3True2000, Tray4.4True500)
+
+*% Tray5 cannot be installed  when Tray4 is 2000-Sheet Tray
+*%InvalidCombination: LIST(Tray4.4True2000, Tray5.5True250)
+*%InvalidCombination: LIST(Tray4.4True2000, Tray5.5True500)
+
+
+
+
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.LETTER)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.LEGAL)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.A4)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.A5)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.EXECUTIVE)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.B5)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.FOLIO)
+*InvalidCombination: LIST(MediaType.ENVELOPE, PaperSize.STATEMENT)
+
+*% No. of Input options + output bins = 4
+
+*%**********************************Installable Options************************************
+*%Standard bin will be the only number of output bins available if tray5 is installed.
+*InvalidCombination: LIST(Tray5.5True250, OutputBins.3Bin)
+*InvalidCombination: LIST(Tray5.5True500, OutputBins.3Bin)
+*InvalidCombination: LIST(Tray5.5True250, OutputBins.2Bin)
+*InvalidCombination: LIST(Tray5.5True500, OutputBins.2Bin)
+*InvalidCombination: LIST(Tray5.5True250, OutputBins.1Bin)
+*InvalidCombination: LIST(Tray5.5True500, OutputBins.1Bin)
+
+*%Standard bin will be the only number of output bins available if tray4 is installed.
+*InvalidCombination: LIST(Tray4.4True250, OutputBins.3Bin)
+*InvalidCombination: LIST(Tray4.4True500, OutputBins.3Bin)
+*InvalidCombination: LIST(Tray4.4True250, OutputBins.2Bin)
+*InvalidCombination: LIST(Tray4.4True500, OutputBins.2Bin)
+
+*%Standard bin will be the only number of output bins available if tray3 is installed.
+*InvalidCombination: LIST(Tray3.3True250, OutputBins.3Bin)
+*InvalidCombination: LIST(Tray3.3True500, OutputBins.3Bin)
+
+*% Duplexing restricts Envelopes and TRANSPARENCY 
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_9)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_10)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_DL)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_C5)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, PaperSize.ENV_B5)
+
+
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_MONARCH)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_9)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_10)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_DL)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_C5)
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, PaperSize.ENV_B5)
+
+*% Duplexing restricts Media Type Envelope
+
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.VERTICAL, MediaType.ENVELOPE)
+
+*InvalidCombination: LIST(DuplexUnit.TRUE, Duplex.HORIZONTAL, MediaType.ENVELOPE)
+
+
+
+
+*%******************************************************************************************
+*Feature: IsDell
+{
+    *Name: "IsDell"  
+    *DefaultOption: TRUE
+    *Option: TRUE
+    {
+         *Name: "IsDell"
+    }
+}
+
+
+
+*%******************************************************************************************
+*%      				Orientation
+*%******************************************************************************************
+*Feature: Orientation
+{
+    *rcNameID: =ORIENTATION_DISPLAY
+    *DefaultOption: PORTRAIT
+    *Option: PORTRAIT
+    {
+        *rcNameID: =PORTRAIT_DISPLAY
+    }
+    *Option: LANDSCAPE_CC90
+    {
+        *rcNameID: =LANDSCAPE_DISPLAY
+    }
+}
+*%******************************************************************************************
+*%      				PageProtect
+*%******************************************************************************************
+*Feature: PageProtect
+{
+    *rcNameID: =PAGE_PROTECTION_DISPLAY
+    *DefaultOption: OFF
+    *Option: OFF
+    {
+        *rcNameID: =OFF_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.4
+            *Cmd: =PJL_PAGEPROTECT_OFF
+        }
+    }
+    *Option: ON
+    {
+        *rcNameID: =ON_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.4
+            *Cmd: =PJL_PAGEPROTECT_ON
+        }
+    }
+}
+
+*%******************************************************************************************
+*%      				Resolution
+*%******************************************************************************************
+*Feature: Resolution
+{
+    *rcNameID: =RESOLUTION_DISPLAY
+    *DefaultOption: 600DPI
+    *Option: 1200DPI
+    {
+        *Name: "1200 x 1200 " =DOTS_PER_INCH
+        *DPI: PAIR(1200, 1200)
+        *TextDPI: PAIR(1200, 1200)
+        *MinStripBlankPixels: 32
+        EXTERN_GLOBAL: *StripBlanks: LIST(ENCLOSED,TRAILING)
+        *SpotDiameter: 100
+        *Command: CmdBeginRaster	{ *Cmd : =PCLXL_CmdBeginRaster }
+        *Command: CmdEndRaster		{ *Cmd : =EndImage }
+        *Command: CmdSendBlockData	{ *Cmd: =PCLXL_CmdSendBlockData }
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.11
+            *Cmd: =PJL_RESOLUTION_1200 =PJL_ENTER_PCLXL =PCLXL_StreamHeader =PCLXL_BeginSession1200 =PCLXL_OpenDataSource
++		  =ubyte_array =ubyte "<17>" "Lexmark Enhanced XL=1.0" =attr_ubyte =CommentData =Comment
+        }
+    }
+    *Option: 600DPI
+    {
+        *Name: "600 x 600 " =DOTS_PER_INCH
+        *DPI: PAIR(600, 600)
+        *TextDPI: PAIR(600, 600)
+        *MinStripBlankPixels: 32
+        EXTERN_GLOBAL: *StripBlanks: LIST(ENCLOSED,TRAILING)
+        *SpotDiameter: 100
+        *Command: CmdBeginRaster	{ *Cmd : =PCLXL_CmdBeginRaster }
+        *Command: CmdEndRaster		{ *Cmd : =EndImage }
+        *Command: CmdSendBlockData	{ *Cmd: =PCLXL_CmdSendBlockData }
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.11
+            *Cmd: =PJL_RESOLUTION_600 =PJL_IET_OFF =PJL_ENTER_PCLXL =PCLXL_StreamHeader =PCLXL_BeginSession600 =PCLXL_OpenDataSource
++		  =ubyte_array =ubyte "<17>" "Lexmark Enhanced XL=1.0" =attr_ubyte =CommentData =Comment
+        }
+    }
+      
+}
+
+
+
+
+*%******************************************************************************************
+*%      				Input Bin
+*%******************************************************************************************
+*Feature: InputBin
+{
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+    *DefaultOption: AutoSelect
+    *Option: AutoSelect
+    {
+        *rcNameID: 278 *% Auto Select
+        *OptionID: 278
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eAutoSelect =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Tray1
+    {
+        *rcNameID: 279 *% Tray 1
+        *OptionID: 279
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eTray1 =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Tray2
+    {
+        *rcNameID: 280 *% Tray 2
+        *OptionID: 280
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eTray2 =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Tray3
+    {
+        *rcNameID: 281 *% Tray 3
+        *OptionID: 281
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eTray3 =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Tray4
+    {
+        *rcNameID: 282 *% Tray 4
+        *OptionID: 282
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eTray4 =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Tray5
+    {
+        *rcNameID: 283 *% Tray 5
+        *OptionID: 283
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eTray5 =attr_ubyte =MediaSource
+        }
+    }
+    *Option: MultiPurpose
+    {
+        *rcNameID: 284 *% "Multi-Purpose Feeder"
+        *OptionID: 284
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eMPFeeder =attr_ubyte =MediaSource
+        }
+    }
+    *Option: Manual
+    {
+        *rcNameID: 285    *% Manual Paper
+        *OptionID: 285
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eManualFeed =attr_ubyte =MediaSource
+        }
+    }
+    *Option: ManualEnv
+    {
+        *rcNameID: 286    *% Manual Envelope
+        *OptionID: 286
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eManualEnvelope =attr_ubyte =MediaSource
+        }
+    }
+     *Option: EnvFeed
+    {
+        *rcNameID: 287   *% Envelope Feeder
+        *OptionID: 287
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.1
+            *Cmd: =ubyte =eEnvelopeFeeder =attr_ubyte =MediaSource
+        }
+    }
+}
+*%******************************************************************************************
+*%      				Duplex Type
+*%******************************************************************************************
+*Feature: Duplex
+{
+    *rcNameID: =TWO_SIDED_PRINTING_DISPLAY
+    *DefaultOption: NONE
+    *Option: NONE
+    {
+        *rcNameID: =NONE_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: =PJL_DUPLEX_OFF
+        }
+    }
+    *Option: VERTICAL
+    {
+        *rcNameID: =FLIP_ON_LONG_EDGE_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: =PJL_DUPLEX_LONGEDGE
+        }
+    }
+    *Option: HORIZONTAL
+    {
+        *rcNameID: =FLIP_ON_SHORT_EDGE_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.9
+            *Cmd: =PJL_DUPLEX_SHORTEDGE
+        }
+    }
+}
+*%******************************************************************
+*%		 		Stapling
+*%******************************************************************
+*%******************************************************************
+*%		 		OffsetPages
+*%******************************************************************
+*%******************************************************************************************
+*%      				Output Bin
+*%******************************************************************************************
+*Feature: OutputBin
+{
+    *rcNameID: =OUTPUTBIN_DISPLAY
+    *DefaultOption: PrtSet
+    *Option: PrtSet
+    {
+        *rcNameID: 300	*% Printer Setting %*
+    }
+    *Option: False
+    {
+        *rcNameID: 343	*% Standard Bin %*
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: =PJL_OUTBIN_STANDARD
+        }
+    }
+    *Option: Bin1
+    {
+        *rcNameID: 344	*% Bin 1 %*
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: =PJL_OUTBIN_BIN1
+        }
+    }
+    *Option: Bin2
+    {
+        *rcNameID: 345	*% Bin 2 %*
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: =PJL_OUTBIN_BIN2
+        }
+    }
+    *Option: Bin3
+    {
+        *rcNameID: 346	*% Bin 3 %*
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.7
+            *Cmd: =PJL_OUTBIN_BIN3
+        }
+     
+    }
+    
+ }
+*%******************************************************************************************
+*%      				Collation
+*%******************************************************************************************
+*Feature: Collate
+{
+    *FeatureType: JOB_PROPERTY
+    *rcNameID: 310	*%"Collate"
+    *DefaultOption: OFF
+    *Option: OFF
+    {
+        *rcNameID: =OFF_DISPLAY
+        *switch: ColorMode
+        {
+    	    *case: Mono
+    	    {
+         	*Command: CmdSelect
+        	{
+            	    *Order: JOB_SETUP.3
+            	    *Cmd: =PJL_COMMENT =PJL_STARTJOB_FOR_PLUGIN =PJL_COLLATE_OFF =PJL_COLORMODEL_BLACK
+        	}
+	    }
+    	    *case: 24bpp
+    	    {
+         	*Command: CmdSelect
+        	{
+            	    *Order: JOB_SETUP.3
+            	    *Cmd: =PJL_COMMENT =PJL_STARTJOB_FOR_PLUGIN =PJL_COLLATE_OFF
+        	}
+	    }
+	}
+    }
+    *Option: ON
+    {
+        *rcNameID: =ON_DISPLAY
+        *switch: ColorMode
+        {
+    	    *case: Mono
+    	    {
+         	*Command: CmdSelect
+        	{
+            	    *Order: JOB_SETUP.3
+            	    *Cmd: =PJL_COMMENT =PJL_STARTJOB_FOR_PLUGIN =PJL_COLLATE_ON =PJL_COLORMODEL_BLACK
+        	}
+	    }
+    	    *case: 24bpp
+    	    {
+         	*Command: CmdSelect
+        	{
+            	    *Order: JOB_SETUP.3
+            	    *Cmd: =PJL_COMMENT =PJL_STARTJOB_FOR_PLUGIN =PJL_COLLATE_ON
+        	}
+	    }
+	}
+    }
+}
+
+*%******************************************************************************************
+*%      				Toner Darkness
+*%******************************************************************************************
+*Feature: TonerDarkness
+{
+    *rcNameID: 326	*% Toner Darkness %*
+    *OptionID: 326
+    *DefaultOption: PrtSet
+    *Option: PrtSet
+    {
+        *rcNameID: 300	*% Printer Setting %*
+    }
+    *Option: One
+    {
+        *rcNameID: 316	*% "1"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_1
+        }
+    }
+    *Option: Two
+    {
+        *rcNameID: 317	*% "2"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_2
+        }
+    }
+    *Option: Three
+    {
+        *rcNameID: 318	*% "3"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_3
+        }
+    }
+    *Option: Four
+    {
+        *rcNameID: 319	*% "4"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_4
+        }
+    }
+    *Option: Five
+    {
+        *rcNameID: 320	*% "5"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_5
+        }
+    }
+    *Option: Six
+    {
+        *rcNameID: 321	*% "6"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_6
+        }
+    }
+    *Option: Seven
+    {
+        *rcNameID: 322	*% "7"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_7
+        }
+    }
+    *Option: Eight
+    {
+        *rcNameID: 323	*% "8"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_8
+        }
+    }
+    *Option: Nine
+    {
+        *rcNameID: 324	*% "9"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_9
+        }
+    }
+    *Option: Ten
+    {
+        *rcNameID: 325	*% "10"
+        *Command: CmdSelect
+        {
+            *Order: JOB_SETUP.2
+            *Cmd: =PJL_TONERDARKNESS_10
+        }
+    }
+}
+*%******************************************************************************************
+*%                                      Color Mode
+*%******************************************************************************************
+*ChangeColorModeOnDoc?: FALSE
+*Feature: ColorMode
+{
+    *rcNameID: =COLOR_PRINTING_MODE_DISPLAY
+    *DefaultOption: Mono
+    *Option: Mono
+    {
+        *rcNameID: =MONO_DISPLAY
+        *DevNumOfPlanes: 1
+        *DevBPP: 24
+        *DrvBPP: 24
+        *Color? : FALSE
+        *PaletteSize: 1
+        *PaletteProgrammable? : TRUE
+        *Command: CmdDefinePaletteEntry { *Cmd: "" }
+    }
+    *Option: 24bpp
+    {
+	*rcNameID: =24BPP_DISPLAY
+	*DevNumberOfPlanes: 1
+	*DevBPP: 24
+	*DrvBPP: 24
+        *Color? : FALSE
+	*PaletteSize: 256
+	*PaletteProgrammable? : TRUE
+	*Command: CmdDefinePaletteEntry { *Cmd: "" }
+    }
+}
+*Feature: PrintAndHold
+{
+    *Name: "PNH"  
+    *DefaultOption: TRUE
+    *Option: TRUE
+    {
+    *Name: "PNH"
+    }
+}
+*Feature: HasKeepPreviousPHJobs
+{
+    *Name: "HCJ"  
+    *DefaultOption: TRUE
+    *Option: TRUE
+    {
+    *Name: "HCJ"
+    }
+}
+
+
+*Feature: HasPrintQuality
+{
+    *Name: "HPQ"
+    *DefaultOption: TRUE
+    *Option: TRUE 
+    {
+    *Name: "HPQ"
+    }
+}
+*%******************************************************************************************
+*%      				Paper Size
+*%******************************************************************************************
+*Feature: PaperSize
+{
+    *rcNameID: =PAPER_SIZE_DISPLAY
+    *DefaultOption: LETTER
+*%************************************ LETTER ****************************************
+    *Option: LETTER
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9600, 12600)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sLetterPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(9760, 12600)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 12900)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sLetterPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((250*TextXRes)/1200)}%l{((225*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%************************************* LEGAL *************************************
+    *Option: LEGAL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9600, 16200)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sLegalPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(9760, 16200)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 16500)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sLegalPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%************************************** A4 **************************************
+    *Option: A4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4249
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9352, 13400)
+                *PrintableOrigin: PAIR(260, 300)
+                *CursorOrigin: PAIR(260, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sA4Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((284*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(9424, 13428)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(200, 13728)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sA4Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((325*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%************************************** A5 **************************************
+    *Option: A5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 2125
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6396, 9372)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sA5Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((284*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(6396, 9324)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(260, 9624)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sA5Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((275*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%************************************EXECUTIVE**************************
+    *Option: EXECUTIVE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8100, 12200)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sExecPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(8180, 12000)
+                *PrintableOrigin: PAIR(220, 300)
+                *CursorOrigin: PAIR(200, 12300)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sExecPaper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((240*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%**************************************** B5 *************************************
+    *Option: B5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 3198
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7920, 11720)
+                *PrintableOrigin: PAIR(300, 180)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sJB5Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((284*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(8160, 11640)
+                *PrintableOrigin: PAIR(200, 250)
+                *CursorOrigin: PAIR(160, 11940)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sJB5Paper =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((236*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************* FOLIO **********************************
+    *Option: FOLIO
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 1028
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9600, 15175)
+                *PrintableOrigin: PAIR(300, 204)
+                *CursorOrigin: PAIR(300, 180)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte "<11>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((236*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(9500, 14800)
+                *PrintableOrigin: PAIR(500, 300)
+                *CursorOrigin: PAIR(226, 15100)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte "<11>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((500*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }*%********************************* STATEMENT **********************************
+    *Option: STATEMENT
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6150, 9800)
+                *PrintableOrigin: PAIR(200, 200)
+                *CursorOrigin: PAIR(300, 100)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte "<13>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((236*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(6200, 9725)
+                *PrintableOrigin: PAIR(200, 200)
+                *CursorOrigin: PAIR(100, 9900)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte "<13>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((240*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************** MONARCH *************************************
+    *Option: ENV_MONARCH
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(3996, 8500)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 200)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sMonarchEnvelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((250*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(4056, 8475)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(200, 8800)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sMonarchEnvelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((200*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************* ENVELOPE # 9 **********************************
+    *Option: ENV_9
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+             *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4030, 10120)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte "<FF>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((325*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(4056, 10056)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(200, 10356)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte "<FF>" =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((200*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************** ENVELOPE # 10 **********************************
+    *Option: ENV_10
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4344, 10920)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 180)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sCOM10Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((275*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(4476, 10900)
+                *PrintableOrigin: PAIR(200, 300)
+                *CursorOrigin: PAIR(200, 11200)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sCOM10Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((200*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************** ENVELOPE DL **********************************
+    *Option: ENV_DL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4576, 9850)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 180)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sDLEnvelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((284*TextXRes)/1200)}%l{((320*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(4796, 9792)
+                *PrintableOrigin: PAIR(200, 300)
+                *CursorOrigin: PAIR(200, 10092)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sDLEnvelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((200*TextXRes)/1200)}%l{((200*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************** ENVELOPE C5 **********************************
+    *Option: ENV_C5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7032, 10224)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 200)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sC5Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(7056, 10324)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(200, 10524)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sC5Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((200*TextXRes)/1200)}%l{((260*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************* ENVELOPE B5 **********************************
+    *Option: ENV_B5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *PageProtectMem: 4109
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7716, 11238)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(300, 160)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sB5Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((254*TextXRes)/1200)}%l{((315*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *PrintableArea: PAIR(7736, 11208)
+                *PrintableOrigin: PAIR(300, 300)
+                *CursorOrigin: PAIR(200, 11508)
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =ubyte_array =sB5Envelope =attr_ubyte =MediaSize =BeginPage
++                         =sint16_xy %l{((220*TextXRes)/1200)}%l{((250*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+*%********************************* CUSTOMSIZE **********************************
+    *Option: CUSTOMSIZE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *MinSize: PAIR(3600, 3600)
+        *MaxSize: PAIR(10200,17004)
+        *MaxPrintableWidth: 9600
+        *MinLeftMargin: 300
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *CustCursorOriginX:  %d{((PhysPaperWidth - 10200) / 2) + 300 }
+                *CustCursorOriginY:   %d{300}
+                *CustPrintableOriginX:  %d{300}
+                *CustPrintableOriginY:  %d{300}
+                *CustPrintableSizeX:   %d{ PhysPaperWidth - 600 }
+                *CustPrintableSizeY:  %d{ PhysPaperLength - 600 }
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =ePortraitOrientation =attr_ubyte =Orientation
++                         =uint16_xy %l{(254*PhysPaperWidth / 12000)}%l{(254*PhysPaperLength / 12000)} =attr_ubyte =CustomMediaSize
++                         =ubyte =eMillimeter =attr_ubyte =CustomMediaSizeUnits =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+            *case: LANDSCAPE_CC90
+            {
+                *CustCursorOriginX:  %d{((PhysPaperWidth - 10200) / 2) + 300 }
+                *CustCursorOriginY:   %d{14004}
+                *CustPrintableOriginX:  %d{300}
+                *CustPrintableOriginY:  %d{300}
+                *CustPrintableSizeX:   %d{ PhysPaperWidth - 600 }
+                *CustPrintableSizeY:  %d{ PhysPaperLength - 600 }
+                *Command: CmdSelect
+                {
+                    *Order: PAGE_SETUP.4
+                    *Cmd: =ubyte =eLandscapeOrientation =attr_ubyte =Orientation
++                         =uint16_xy %l{(254*PhysPaperWidth / 12000)}%l{(254*PhysPaperLength / 12000)} =attr_ubyte =CustomMediaSize
++                         =ubyte =eMillimeter =attr_ubyte =CustomMediaSizeUnits =BeginPage
++                         =sint16_xy %l{((300*TextXRes)/1200)}%l{((300*TextYRes)/1200)} =attr_ubyte =PageOrigin =SetPageOrigin
+                }
+            }
+        }
+    }
+}
+*%******************************************************************************************
+*%      				Media Type
+*%******************************************************************************************
+*Feature: MediaType
+{
+    *rcNameID: =MEDIA_TYPE_DISPLAY
+    *DefaultOption: PrtSet
+    *Option: PrtSet
+    {
+        *rcNameID: 300	*% Printer Setting %*
+        *OptionID: 300
+    }
+    *Option: STANDARD
+    {
+        *rcNameID: RESDLL.UniresDLL.10512
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<FF>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: BOND
+    {
+        *rcNameID: 265
+        *OptionID: 265
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<FA>" =attr_ubyte =MediaType
+        }
+    }        
+    *Option: TRANSPARENCY
+    {
+        *rcNameID: =TRANSPARENCY_DISPLAY
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<FE>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: ENVELOPE
+    {
+        *rcNameID: 267
+        *OptionID: 267
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F7>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CARDSTOCK
+    {
+        *rcNameID: 268
+        *OptionID: 268
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<FC>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: COLORED
+    {
+        *rcNameID: 269
+        *OptionID: 269
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F8>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: PREPRINTED
+    {
+        *rcNameID: 270
+        *OptionID: 270
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F9>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: LETTERHEAD
+    {
+        *rcNameID: 271
+        *OptionID: 271
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<FB>" =attr_ubyte =MediaType
+        }
+    }
+     
+    *Option: CUSTOMTYPE1
+    {
+        *rcNameID: 272
+        *OptionID: 272
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F6>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CUSTOMTYPE2
+    {
+        *rcNameID: 273
+        *OptionID: 273
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F5>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CUSTOMTYPE3
+    {
+        *rcNameID: 274
+        *OptionID: 274
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F4>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CUSTOMTYPE4
+    {
+        *rcNameID: 275
+        *OptionID: 275
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F3>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CUSTOMTYPE5
+    {
+        *rcNameID: 276
+        *OptionID: 276
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F2>" =attr_ubyte =MediaType
+        }
+    }
+    *Option: CUSTOMTYPE6
+    {
+        *rcNameID: 277
+        *OptionID: 277
+        *Command: CmdSelect
+        {
+            *Order: PAGE_SETUP.3
+            *Cmd: =ubyte "<F1>" =attr_ubyte =MediaType
+        }
+    }
+}
+*%******************************************************************************************
+*%      				HalfTone
+*%******************************************************************************************
+*Feature: Halftone
+{
+    *rcNameID: =HALFTONING_DISPLAY
+    *DefaultOption: HT_PATSIZE_AUTO
+    *Option: HT_PATSIZE_AUTO
+    {
+        *rcNameID: =HT_AUTO_SELECT_DISPLAY
+    }
+    *Option: HT_PATSIZE_SUPERCELL_M
+    {
+        *rcNameID: =HT_SUPERCELL_DISPLAY
+    }
+    *Option: HT_PATSIZE_6x6_M
+    {
+        *rcNameID: =HT_DITHER6X6_DISPLAY
+    }
+    *Option: HT_PATSIZE_8x8_M
+    {
+        *rcNameID: =HT_DITHER8X8_DISPLAY
+    }
+}
+*%******************************************************************************************
+*%      				   Dither
+*%******************************************************************************************
+*Feature: Dither
+{
+    *rcNameID: 414	*% "Dither Quality"
+    *OptionID: 414
+    *DefaultOption: LOQUALITY
+    *Option: LOQUALITY
+    {
+       *rcNameID: 416	*% "Dither Quality Low"
+    }
+}
+*%******************************************************************************************
+*%      					Fonts
+*%******************************************************************************************
+*DefaultFont: 1
+*DefaultCTT: 0
+*CharPosition: BASELINE
+*TTFSEnabled?: FALSE
+*%*FontFormat: OEM_CALLBACK
+*MinFontID: 1
+*MaxFontID: 65535
+*MinGlyphID: 1
+*MaxGlyphID: 1000
+
+*DeviceFonts: LIST(1,2,3,4,5,6,7,8,9,14,15,16,17,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
++		        41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,61,62)
+*Command: CmdSetFontID { *Cmd : "" }
+*Command: CmdSelectFontID
+{
+    *Cmd: ""
+    *Params: LIST(FontHeight, CurrentFontID, TextYRes)
+}
+*Command: CmdSetCharCode { *Cmd : "" }
+*Command: CmdBoldOn { *Cmd : "" }
+*Command: CmdBoldOff { *Cmd : "" }
+*Feature: TrueTypeFormat
+{
+    *rcNameID: 410		*% "TrueType Format"
+    *OptionID: 410
+    *DefaultOption: OUTLINE
+    *Option: OUTLINE
+    {
+        *rcNameID: 411		*% "TrueType Outline"
+    }
+    *Option: BITMAP
+    {
+        *rcNameID: 412		*% "TrueType Bitmap"
+    }
+    *Option: GRAPHICS
+    {
+        *rcNameID: 413		*% "TrueType Graphics"
+    }
+}
+
+*switch: TrueTypeFormat
+{
+    *case: OUTLINE
+    {
+        *FontFormat: HPPCL_OUTLINE
+    }
+    *case: BITMAP
+    {
+        *FontFormat: HPPCL
+    }
+    *case: GRAPHICS
+    {
+    }
+}
+*%******************************************************************************************
+*%      				Cursor and Page Control
+*%******************************************************************************************
+*RotateCoordinate?: TRUE
+*RotateRaster?: TRUE
+*RotateFont?: TRUE
+*EjectPageWithFF?: TRUE
+*TextCaps: LIST(TC_CR_ANY,TC_CR_90,TC_SF_X_YINDEP,TC_SA_CONTIN,TC_IA_ABLE,TC_UA_ABLE)
+*MemoryUsage: LIST(FONT)
+*CursorXAfterCR: AT_PRINTABLE_X_ORIGIN
+*CursorXAfterSendBlockData: AT_GRXDATA_ORIGIN
+*CursorYAfterSendBlockData: AUTO_INCREMENT
+*BadCursorMoveInGrxMode: LIST(X_PORTRAIT,Y_LANDSCAPE)
+*XMoveThreshold: 0
+*YMoveThreshold: 0
+*XMoveUnit: 1200
+*YMoveUnit: 1200
+*Command: CmdXMoveAbsolute {    *Cmd: "" }
+*Command: CmdXMoveRelRight
+{
+    *Cmd: ""
+    *Params: LIST(DestXRel, TextXRes)
+}
+*Command: CmdXMoveRelLeft
+{
+    *Cmd: ""
+    *Params: LIST(DestXRel, TextXRes)
+}
+*Command: CmdYMoveAbsolute
+{
+    *Cmd: ""
+    *Params: LIST(DestY, TextYRes)
+}
+*Command: CmdYMoveRelDown
+{
+    *Cmd: ""
+    *Params: LIST(DestYRel, TextYRes)
+}
+*Command: CmdYMoveRelUp
+{
+    *Cmd: ""
+    *Params: LIST(DestYRel, TextYRes)
+}
+*Command: CmdCR { *Cmd: "" }
+*Command: CmdLF { *Cmd: "" }
+*Command: CmdFF { *Cmd: "" }
+
+
+*Command: CmdSetAnyRotation
+{
+    *Cmd: ""
+    *Params: LIST(PrintDirInCCDegrees)
+}
+*Command: CmdSetSimpleRotation
+{
+    *Cmd: ""
+    *Params: LIST(PrintDirInCCDegrees)
+}
+*% End of GPD file for Dell Laser Printer 5310n Laser Printer

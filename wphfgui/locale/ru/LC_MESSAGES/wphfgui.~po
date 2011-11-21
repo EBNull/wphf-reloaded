@@ -1,0 +1,694 @@
+# Winprint HylaFAX Reloaded
+# Copyright (C) 2011 Monti Lorenzo
+# This file is distributed under the GNU General Public License version 3.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Winprint HylaFAX Reloaded\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 14:27+0200\n"
+"PO-Revision-Date: 2011-10-27 14:31+0100\n"
+"Last-Translator: Monti Lorenzo <lomo74@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: dxgettext 1.2.2\n"
+
+#. ConfigForm..Caption
+#. ConfigForm..Panel1..Label5..Caption
+#: Config.dfm:7
+#: Config.dfm:111
+msgid "Configure HylaFAX Client"
+msgstr "Настройка HylaFAX Client"
+
+#. ConfigForm..Font.Name
+#. ConfigForm..Panel1..Label5..Font.Name
+#. ConfigForm..Panel1..Label9..Font.Name
+#. ConfigForm..Panel1..Label12..Font.Name
+#. ConfigForm..Panel1..Label6..Font.Name
+#. RecipientName..Font.Name
+#. SelectRcpt..Font.Name
+#. FAXSend..Font.Name
+#. FAXSend..Panel1..Label4..Font.Name
+#. FAXSend..Panel1..Label2..Font.Name
+#. FAXSend..Panel1..Label8..Font.Name
+#. FAXSend..Panel1..Label12..Font.Name
+#. FAXSend..Panel2..Label6..Font.Name
+#. FAXSend..Panel2..Label7..Font.Name
+#: Config.dfm:14
+#: Config.dfm:115
+#: Config.dfm:129
+#: Config.dfm:143
+#: Config.dfm:157
+#: Recipient.dfm:12
+#: Select.dfm:11
+#: SendFAX.dfm:13
+#: SendFAX.dfm:108
+#: SendFAX.dfm:122
+#: SendFAX.dfm:136
+#: SendFAX.dfm:150
+#: SendFAX.dfm:200
+#: SendFAX.dfm:215
+msgid "Tahoma"
+msgstr ""
+
+#. ConfigForm..Panel1..Label9..Caption
+#. FAXSend..Panel1..Label8..Caption
+#: Config.dfm:125
+#: SendFAX.dfm:132
+msgid "rel. 0.3.4"
+msgstr ""
+
+#. ConfigForm..Panel1..Label12..Caption
+#. FAXSend..Panel1..Label12..Caption
+#: Config.dfm:139
+#: SendFAX.dfm:146
+msgid "Winprint HylaFAX Reloaded"
+msgstr ""
+
+#. ConfigForm..Panel1..Label6..Caption
+#. FAXSend..Panel1..Label2..Caption
+#: Config.dfm:153
+#: SendFAX.dfm:118
+msgid "Enhanced by Lorenzo Monti"
+msgstr "Расширение от Lorenzo Monti"
+
+#. ConfigForm..Panel3..btnOK..Caption
+#. RecipientName..OK..Caption
+#. SelectRcpt..OK..Caption
+#: Config.dfm:174
+#: Recipient.dfm:60
+#: Select.dfm:41
+msgid "OK"
+msgstr "Ввод"
+
+#. ConfigForm..Panel3..btnCancel..Caption
+#. RecipientName..Cancel..Caption
+#. SelectRcpt..Cancel..Caption
+#: Config.dfm:185
+#: Recipient.dfm:71
+#: Select.dfm:53
+msgid "Cancel"
+msgstr "Отмена"
+
+#. ConfigForm..tabs..tsMain..Caption
+#: Config.dfm:201
+msgid "Main"
+msgstr "Основные"
+
+#. ConfigForm..tabs..tsMain..Label11..Caption
+#: Config.dfm:211
+msgid "Language"
+msgstr "Язык"
+
+#. ConfigForm..tabs..tsMain..Label10..Caption
+#: Config.dfm:219
+msgid "Resolution"
+msgstr "Разрешение"
+
+#. ConfigForm..tabs..tsMain..Label8..Caption
+#: Config.dfm:227
+msgid "Notification"
+msgstr "Оповещение"
+
+#. ConfigForm..tabs..tsMain..Label7..Caption
+#: Config.dfm:235
+msgid "Page size"
+msgstr "Размер страницы"
+
+#. ConfigForm..tabs..tsMain..Label4..Caption
+#: Config.dfm:243
+msgid "Modem"
+msgstr "IAX модем"
+
+#. ConfigForm..tabs..tsMain..Default..Caption
+#: Config.dfm:251
+msgid "Default notify"
+msgstr "Оповещение по-умолчанию"
+
+#. ConfigForm..tabs..tsMain..Label3..Caption
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label17..Caption
+#: Config.dfm:259
+#: Config.dfm:540
+msgid "Password"
+msgstr "Пароль"
+
+#. ConfigForm..tabs..tsMain..Label2..Caption
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label16..Caption
+#: Config.dfm:267
+#: Config.dfm:533
+msgid "Username"
+msgstr "Пользователь"
+
+#. ConfigForm..tabs..tsMain..Label1..Caption
+#: Config.dfm:275
+msgid "HylaFAX server address"
+msgstr "Адрес сервера"
+
+#. ConfigForm..tabs..tsMain..hResolution..Hint
+#: Config.dfm:290
+msgid "Resolution. \"Fine\" ought to be enough for anybody."
+msgstr "Разрешение. \"Fine\" будет достаточно для большинства случаев."
+
+#. ConfigForm..tabs..tsMain..hResolution..Text
+#. ConfigForm..tabs..tsMain..hResolution....Items.Strings
+#: Config.dfm:294
+#: Config.dfm:297
+msgid "Fine"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hResolution....Items.Strings
+#: Config.dfm:296
+msgid "Standard"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hResolution....Items.Strings
+#: Config.dfm:298
+msgid "Superfine"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hResolution....Items.Strings
+#: Config.dfm:299
+msgid "Ultrafine"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hResolution....Items.Strings
+#: Config.dfm:300
+msgid "Hyperfine"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hPassiveIPIgnore..Hint
+#: Config.dfm:307
+msgid "If flagged, IP address returned by PASV command is ignored."
+msgstr "Если выбрано, IP адрес полученный через PASV будет игнорирован."
+
+#. ConfigForm..tabs..tsMain..hPassiveIPIgnore..Caption
+#: Config.dfm:308
+msgid "Ignore PASV IP address"
+msgstr "Игнорировать PASV IP-адрес"
+
+#. ConfigForm..tabs..tsMain..hNotificationType..Hint
+#: Config.dfm:316
+msgid "Which events to notify."
+msgstr "Оповещение в случае"
+
+#. ConfigForm..tabs..tsMain..hNotificationType..Text
+#. ConfigForm..tabs..tsMain..hNotificationType....Items.Strings
+#: Config.dfm:320
+#: Config.dfm:322
+msgid "Failure and Success"
+msgstr "Ошибка отправки и Успешная отправка"
+
+#. ConfigForm..tabs..tsMain..hNotificationType....Items.Strings
+#: Config.dfm:323
+msgid "Success Only"
+msgstr "Успешная отправка"
+
+#. ConfigForm..tabs..tsMain..hNotificationType....Items.Strings
+#: Config.dfm:324
+msgid "Failure Only"
+msgstr "Ошибка отправки"
+
+#. ConfigForm..tabs..tsMain..hNotificationType....Items.Strings
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType..Text
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType....Items.Strings
+#: Config.dfm:325
+#: Config.dfm:468
+#: Config.dfm:470
+msgid "None"
+msgstr "Нет"
+
+#. ConfigForm..tabs..tsMain..hPageSize..Hint
+#: Config.dfm:332
+msgid "Obvious."
+msgstr "Вид."
+
+#. ConfigForm..tabs..tsMain..hPageSize..Text
+#. ConfigForm..tabs..tsMain..hPageSize....Items.Strings
+#: Config.dfm:337
+#: Config.dfm:339
+msgid "US Letter"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hPageSize....Items.Strings
+#: Config.dfm:340
+msgid "A4"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hModem..Hint
+#: Config.dfm:347
+msgid "Which modem HylaFAX should use. Leave blank to use any modem."
+msgstr "Укажите Ваш модем HylaFAX(ttyIAX). Для отправки с любого, оставьте поле пустым."
+
+#. ConfigForm..tabs..tsMain..hDefaultEmail..Hint
+#: Config.dfm:356
+msgid "Events will be notified to this email address."
+msgstr "Оповещения будут оправляться на этот адрес"
+
+#. ConfigForm..tabs..tsMain..hDefaultEmail..Text
+#: Config.dfm:359
+msgid "email@address.com"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hPassword..Hint
+#: Config.dfm:366
+msgid "HylaFAX password. Use faxadduser to setup."
+msgstr "HylaFAX пароль. Настраивается в faxadduser."
+
+#. ConfigForm..tabs..tsMain..hPassword..PasswordChar
+#: Config.dfm:368
+msgid "*"
+msgstr ""
+
+#. ConfigForm..tabs..tsMain..hUsername..Hint
+#: Config.dfm:376
+msgid "HylaFAX user. Use faxadduser to setup."
+msgstr "HylaFAX пользователь. Настраивается в faxadduser."
+
+#. ConfigForm..tabs..tsMain..hUsername..Text
+#: Config.dfm:379
+msgid "fax"
+msgstr "факс"
+
+#. ConfigForm..tabs..tsMain..hServer....Hint
+#: Config.dfm:388
+msgid "IP address or DNS name of HylaFAX server. Also accepts SERVER:PORT syntax."
+msgstr "IP адрес или DNS имя HylaFAX сервера. Можно ввести SERVER:PORT."
+
+#. ConfigForm..tabs..tsMain..hServer..Text
+#: Config.dfm:391
+msgid "fax.server"
+msgstr "факс-сервер"
+
+#. ConfigForm..tabs..tsAddrBook..Caption
+#: Config.dfm:395
+msgid "Address book"
+msgstr "Адресная книга"
+
+#. ConfigForm..tabs..tsAddrBook..Label14..Caption
+#: Config.dfm:406
+msgid "Address book type"
+msgstr "Тип адресной книги"
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..Caption
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType....Items.Strings
+#: Config.dfm:414
+#: Config.dfm:471
+msgid "CSV"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..Label13..Caption
+#: Config.dfm:424
+msgid "Address book location"
+msgstr "Расположение адресной книги"
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..hAddressBook....Hint
+#: Config.dfm:433
+msgid "The path to addressbook.csv. File must be in CSV format delimited by commas."
+msgstr "Путь к addressbook.csv. Файл должен быть в CSV-фомате (разделитель-запятые)"
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..btnBrowse..Hint
+#: Config.dfm:442
+msgid "Browse..."
+msgstr "Обзор..."
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..btnBrowse..Caption
+#: Config.dfm:444
+msgid "..."
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..btnDefault..Hint
+#: Config.dfm:453
+msgid "Set to default location (%APPDATA%\\Winprint HylaFAX Reloaded)"
+msgstr "Установить по умолчанию (%APPDATA%\\Winprint HylaFAX Reloaded)"
+
+#. ConfigForm..tabs..tsAddrBook..gbAddressBook..btnDefault..Caption
+#: Config.dfm:455
+msgid "Default"
+msgstr "По умолчанию"
+
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType....Items.Strings
+#. ConfigForm..tabs..tsAddrBook..gbMAPI..Caption
+#: Config.dfm:472
+#: Config.dfm:482
+msgid "Extended MAPI"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType....Items.Strings
+#: Config.dfm:473
+msgid "Windows Contacts"
+msgstr "Контакты Windows"
+
+#. ConfigForm..tabs..tsAddrBook..hAddrBookType....Items.Strings
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Caption
+#: Config.dfm:474
+#: Config.dfm:519
+msgid "ODBC"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbMAPI..hMAPIDefProfile..Caption
+#: Config.dfm:492
+msgid "Use default profile"
+msgstr "Использовать профиль по умолчанию"
+
+#. ConfigForm..tabs..tsAddrBook..gbMAPI..hMAPIUseProfile..Caption
+#: Config.dfm:500
+msgid "Use this profile:"
+msgstr "Использовать профиль: "
+
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label15..Caption
+#: Config.dfm:526
+msgid "DSN"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label18..Caption
+#: Config.dfm:547
+msgid "Fax field"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label19..Caption
+#: Config.dfm:554
+msgid "Name field"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbODBC..Label20..Caption
+#: Config.dfm:561
+msgid "Table"
+msgstr ""
+
+#. ConfigForm..tabs..tsAddrBook..gbODBC..hODBCAuth..Caption
+#: Config.dfm:612
+msgid "ODBC authentication"
+msgstr ""
+
+#. RecipientName..Caption
+#: Recipient.dfm:5
+msgid "Recipient's name"
+msgstr "Имена получателей"
+
+#. RecipientName..Label1..Caption
+#: Recipient.dfm:26
+msgid "FAX number:"
+msgstr "Номер факса:"
+
+#. RecipientName..Label2..Caption
+#: Recipient.dfm:34
+msgid "Recipient's name:"
+msgstr "Имена получателей:"
+
+#. RecipientName..FAXNumber..Text
+#: Recipient.dfm:45
+msgid "FAXNumber"
+msgstr "Номер факса"
+
+#. SelectRcpt..Caption
+#: Select.dfm:4
+msgid "Select Recipients"
+msgstr "Выберите получателей"
+
+#. SelectRcpt..popup..mnuSelectAll..Caption
+#. FAXSend..popup..mnuSelectAll..Caption
+#: Select.dfm:62
+#: SendFAX.dfm:779
+msgid "Select All"
+msgstr "Выбрать все"
+
+#. SelectRcpt..popup..mnuSelectNone..Caption
+#. FAXSend..popup..mnuSelectNone..Caption
+#: Select.dfm:66
+#: SendFAX.dfm:783
+msgid "Select None"
+msgstr "Отменить выбор"
+
+#. FAXSend..Caption
+#: SendFAX.dfm:6
+msgid "Send FAX to"
+msgstr "Отправить факс для"
+
+#. FAXSend..Panel1..Label4..Caption
+#: SendFAX.dfm:104
+msgid "Send FAX"
+msgstr "Отправить факс"
+
+#. FAXSend..Panel2..Label1..Caption
+#: SendFAX.dfm:172
+msgid "FAX numbers"
+msgstr "Номера факсов"
+
+#. FAXSend..Panel2..Label3..Caption
+#: SendFAX.dfm:181
+msgid "Notify E-Mail"
+msgstr "Оповестить по E-Mail"
+
+#. FAXSend..Panel2..Label5..Caption
+#: SendFAX.dfm:188
+msgid "Documents to send:"
+msgstr "Документы к отправке:"
+
+#. FAXSend..Panel2..Label6..Caption
+#: SendFAX.dfm:196
+msgid "Selected documents will be sent as a single fax."
+msgstr "Выбранные документы будут отправлены как один факс."
+
+#. FAXSend..Panel2..Label7..Caption
+#: SendFAX.dfm:211
+msgid "You can append new pages, or send selected documents now."
+msgstr "Вы можете добавить страницы, или отправить выбранные сейчас."
+
+#. FAXSend..Panel2..Label9..Caption
+#: SendFAX.dfm:227
+msgid "Keep retrying for"
+msgstr "Повторить через"
+
+#. FAXSend..Panel2..Label10..Caption
+#: SendFAX.dfm:236
+msgid "hours"
+msgstr "часов"
+
+#. FAXSend..Panel2..Label11..Caption
+#: SendFAX.dfm:245
+msgid "days"
+msgstr "дней"
+
+#. FAXSend..Panel2..hFAXNumber..Hint
+#: SendFAX.dfm:252
+msgid "Enter multiple recipients separated by semicolons."
+msgstr "Введите несколько получателей разделяя точкой-с-запятой."
+
+# SendFAX.dfm:266 D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:137
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:275
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:828
+#. FAXSend..Panel2..ABNames..Text
+#: SendFAX.dfm:265
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:137
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:275
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:828
+msgid "Select from address book"
+msgstr "Выберите из адресной книги"
+
+#. FAXSend..Panel2..btnDelete..Caption
+#: SendFAX.dfm:284
+msgid "Delete entry"
+msgstr "Удалить ввод"
+
+#. FAXSend..Panel2..btnSave..Caption
+#: SendFAX.dfm:294
+msgid "Save number"
+msgstr "Сохранить номер"
+
+#. FAXSend..Panel2..btnUp..Caption
+#. FAXSend..actions..actUp..Caption
+#: SendFAX.dfm:318
+#: SendFAX.dfm:717
+msgid "Up"
+msgstr "Вверх"
+
+#. FAXSend..Panel2..btnDown..Caption
+#. FAXSend..actions..actDown..Caption
+#: SendFAX.dfm:460
+#: SendFAX.dfm:721
+msgid "Down"
+msgstr "Вниз"
+
+#. FAXSend..Panel2..rbSendNow..Caption
+#: SendFAX.dfm:610
+msgid "Send immediately"
+msgstr "Отправить немедленно"
+
+#. FAXSend..Panel2..rbPostpone..Caption
+#: SendFAX.dfm:622
+msgid "Postpone to"
+msgstr "Отложить до"
+
+#. FAXSend..Panel2..hTime..Format
+#. FAXSend..Panel2..hHours..Format
+#: SendFAX.dfm:644
+#: SendFAX.dfm:657
+msgid "HH:mm"
+msgstr "ЧЧ:мм"
+
+#. FAXSend..actions..actSend..Caption
+#: SendFAX.dfm:713
+msgid "Send"
+msgstr "Отправить"
+
+#. FAXSend..actions..actSave..Caption
+#: SendFAX.dfm:725
+msgid "Save Number"
+msgstr "Сохранить номер"
+
+#. FAXSend..actions..actDelete..Caption
+#: SendFAX.dfm:729
+msgid "Delete Entry"
+msgstr "Удалить ввод"
+
+#. FAXSend..actions..actConfigure..Caption
+#: SendFAX.dfm:733
+msgid "Configure"
+msgstr "Настройка"
+
+#. FAXSend..actions..actClose..Caption
+#: SendFAX.dfm:737
+msgid "Close"
+msgstr "Закрыть"
+
+#. FAXSend..actions..actSelect..Caption
+#: SendFAX.dfm:741
+msgid "Select..."
+msgstr "Выбрать..."
+
+#. FAXSend..popup..mnuAddfile..Caption
+#: SendFAX.dfm:775
+msgid "Add file..."
+msgstr "Добавить файл..."
+
+#. FAXSend..opendlg..Filter
+#: SendFAX.dfm:788
+msgid "All supported files|*.ps;*.pdf;*.tif;*.tiff;*.pcl|All files|*.*"
+msgstr "Все поддерживаемые форматы|*.ps;*.pdf;*.tif;*.tiff;*.pcl|Все файлы|*.*"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookCSV.cpp:53
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookCSV.cpp:53
+msgid "Unable to lock addressbook.csv!"
+msgstr "Не могу блокировать addressbook.csv!"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookCSV.cpp:187
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookCSV.cpp:203
+msgid "Unable to create addressbook.csv!"
+msgstr "Не могу создать addressbook.csv!"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:98
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:98
+msgid "Unable to query address book contents table: 0x"
+msgstr "Не могу запросить содержание адресной книги: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:205
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:205
+msgid "Unable to query address book hierarchy table: 0x"
+msgstr "Не могу запросить иерархическую таблицу адресной книги: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:239
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:239
+msgid "Unable to open address book sub container: 0x"
+msgstr "Не могу открыть контейнер адресной книги: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:296
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:296
+msgid "Unable to initialize MAPI: 0x"
+msgstr "Не могу инициализировать MAPI: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:317
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:317
+msgid "Unable to logon to MAPI: 0x"
+msgstr "Не могу подключится к MAPI (имя-пароль): 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:322
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:322
+msgid "Unable to open MAPI address book: 0x"
+msgstr "Не могу открыть адресную книгу MAPI: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:327
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:327
+msgid "Unable to open MAPI address book container: 0x"
+msgstr "Не могу открыть контейнер с адресной книгой MAPI: 0x"
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:296
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:83
+msgid "Unable to initialize ODBC: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:88
+msgid "Unable to setup ODBC: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:93
+msgid "Unable to create ODBC connection: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:98
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:103
+msgid "Unable to setup ODBC connection: "
+msgstr ""
+
+# D:\proj\wphf-reloaded\wphfgui\AddrBookMAPI.cpp:239
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:114
+msgid "Unable to open ODBC connection: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:119
+msgid "Unable to create ODBC statement: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:132
+msgid "Unable to execute ODBC statement: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:137
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:142
+msgid "Unable to bind ODBC column: "
+msgstr ""
+
+#: D:\proj\wphf-reloaded\wphfgui\AddrBookODBC.cpp:148
+msgid "Unable to fetch ODBC data: "
+msgstr ""
+
+# D:\proj\wphf-reloaded\wphfgui\Config.cpp:53
+#: D:\proj\wphf-reloaded\wphfgui\Config.cpp:53
+msgid "Choose address book location"
+msgstr "Укажите расположение адресной книги"
+
+# D:\proj\wphf-reloaded\wphfgui\Config.cpp:83
+#: D:\proj\wphf-reloaded\wphfgui\Config.cpp:83
+msgid "Specify a valid path for the Address Book"
+msgstr "Укажите существующий путь к адресной книге"
+
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:149
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:149
+msgid "Configuration files have been moved to the user profile."
+msgstr "Файлы конфигурации были перемещены в профиль пользователя."
+
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:172
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:172
+msgid "Client is not configured. Would you like to configure it now?"
+msgstr "Программа не настроена. Хотите настроить сейчас?"
+
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:266
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:266
+msgid ""
+" is already present in the address book.\n"
+"Do you want to modify the associated number?"
+msgstr ""
+" уже есть в адресной книге.\n"
+"Желаете изменить присоединенный номер?"
+
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:761
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:761
+msgid "Unsent faxes will be lost. Are you sure you want to exit?"
+msgstr "Не отправленные факсы будут утеряны. Вы уверены, что хотите выйти?"
+
+# D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:824
+#: D:\proj\wphf-reloaded\wphfgui\SendFAX.cpp:824
+msgid "Delete recipient?"
+msgstr "Удалить получателя?"
+

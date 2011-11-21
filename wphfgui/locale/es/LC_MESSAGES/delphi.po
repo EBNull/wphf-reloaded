@@ -1,0 +1,22 @@
+# Winprint HylaFAX Reloaded
+# Copyright (C) 2011 Monti Lorenzo
+# This file is distributed under the GNU General Public License version 3.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Winprint HylaFAX Reloaded\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2011-08-24 15:17+0100\n"
+"Last-Translator: Monti Lorenzo <lomo74@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Confirm"
+msgstr "Confirmación"
+
+msgid "&Yes"
+msgstr "&Sí"
+
+msgid "&No"
+msgstr ""

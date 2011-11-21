@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v3" manifestVersion="1.0">
+  <assemblyIdentity name="prndl001.inf" version="6.1.7233.0" processorArchitecture="x86" language="neutral" buildType="release" publicKeyToken="31bf3856ad364e35" type="driverUpdate" versionScope="nonSxS" />
+  <dependency discoverable="no" resourceType="Resources" buildFilter="">
+    <dependentAssembly dependencyType="prerequisite">
+      <assemblyIdentity name="prndl001.inf.Resources" version="6.1.7233.0" processorArchitecture="x86" language="*" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS" />
+    </dependentAssembly>
+  </dependency>
+  <file name="prndl001.Inf" sourceName="prndl001.Inf" importPath="$(build.nttree)\printer_infs\">
+    <infFile xmlns="urn:schemas-microsoft-com:asm.v3" />
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">/Tu0fuvOnNEwKLSC7YFj++vJqRt39LwE9mUhLHsscUo=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="prndl001.cat" sourceName="prndl001.cat" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">OfXAw/++6J1HTM6q9A56I45XSK53esWG4vfDYR3BWYE=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCNCM.GPD" sourceName="DLUXCNCM.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">nIx3hFWCqK+ekEnm/Irt0WqfNRwYgidZ0Co6+tLde24=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXG001.DLL" sourceName="DLUXG001.DLL" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">2x1cnalRwI2Pxu6lvmitBxta8oT90TL2D3NRtGTaxT0=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXI001.INI" sourceName="DLUXI001.INI" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">BrBKjqJG5F48jO6XO5pVk1KJj+ydJEFdKl5inys7rHg=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXU001.DLL" sourceName="DLUXU001.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">EOql3i1l7KhqGQQe0f+jA01qUQ0cJtjmbwi5GaOK84g=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCN01.GPD" sourceName="DLUXCN01.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">VtWDZ/EkpPbn4Q2f5Ey/9o+vxTc3xKXOCeqFwmm7hdc=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCN02.GPD" sourceName="DLUXCN02.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">cqU5hpo0sAhgGXOjnBCITmckIXBFqZf+NC2FqD6GB04=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCN02.PPD" sourceName="DLUXCN02.PPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">ulDncmBc5amaomo85gj+nJYZTMz0+4SChMxJeJXKeXk=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCN03.GPD" sourceName="DLUXCN03.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">szE0nSrz9ON3rvNhKX4nnd8Vjw6MVyOwORfzuWuH+sY=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DLUXCN03.PPD" sourceName="DLUXCN03.PPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">QRGJ1+/LTylAav+LBKpI4WvfS7VM6Z6J6hM0ZYTg9sI=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DECOMU.DLL" sourceName="DECOMU.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">o/7pETSHMcVL40ufkha35NO/RqjbbuchTVD/qwn7Me8=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DEPCLRC.DLL" sourceName="DEPCLRC.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">zw75vlbUqLWKQKRqFgxHSxhQHwP6gt/E6IhLexd7aKc=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DEPCLRC.GPD" sourceName="DEPCLRC.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">cl5BvMKjI8e0f+gqRP4tKU0D+bGNsjgnlFoEBb+sTJw=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DE1600N.GPD" sourceName="DE1600N.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">Jsud7C9VIrhwuhl3rhxKFe7Iu8kZFzjo+qQhJHP4ZMg=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DE1600N.INI" sourceName="DE1600N.INI" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">otYT1SCX7isz7xIt/niLKjvwFK824q0jwRfkxEp5LiM=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DE1600N.PPD" sourceName="DE1600N.PPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">vCpKx9eDCH52cQEjpxXpjvg4jB2viRsTdhlz1X0lJ0E=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LXXLMAC.GPD" sourceName="LXXLMAC.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">//05uiKL3bdL6E9+JZtu13Q9qg0OlvtCw3tFqMYvdVE=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LXXLRES.DLL" sourceName="LXXLRES.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">8okxkXuWftwQd1yuWATAG2ki+9hHN38I4krMacS4ajE=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LEXXL.INI" sourceName="LEXXL.INI" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">VFx/GIPsqutGbFtgQ0YCOoBIBdmuyudRPL9DGKGrUQw=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LXXLRD.DLL" sourceName="LXXLRD.DLL" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">33nkH1lgXcELaw7TKEzFLNVda81fyu2Gn7NxiUahvXo=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LXXLUI.DLL" sourceName="LXXLUI.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">d8LThjnC4Xw/0/wOWYt0+HTOCiC4V6hpmlP9sRH+8HE=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\LMPRTPRC.DLL" sourceName="LMPRTPRC.DLL" sourcePath="I386\" importPath="$(build.nttree)\multi\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">fQZMEg9YudGaPrxSVz4x7VsjV/gRxTLxtzipt1o6QP0=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAPB50.GPD" sourceName="DKAAPB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">Awpqu2SilypqDaS+KMjq12zh2BXJLRYIZadDqW9vq5Y=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAPB51.GPD" sourceName="DKAAPB51.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">LtITbuEHDPDbI+6gHzvJJm8s4zNKKfxE7DefpPAti2Q=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAYB50.GPD" sourceName="DKAAYB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">iT4C8tg/NvXZGNhEj5QR5sFfKZWpTSw/VEIl/tNTL+g=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAYB51.GPD" sourceName="DKAAYB51.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">6xg4JqrTn8wdIupabZovd92BWqhtaJh+vyDtximYXFM=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAATB50.GPD" sourceName="DKAATB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">ffe8lPxshTRaH7pQwowENfgnTecn2Mzrpk47dj1973Q=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAATB51.GPD" sourceName="DKAATB51.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">CBl3aB9kLzxTrd8ecGWi8f8beAAFjNcsaYATW3Xnyb0=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAGB50.GPD" sourceName="DKAAGB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">5fs//rQDtpW/fpFPb9dvMqy6NxMXcvNOKR0pyc8nrkw=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAEB50.GPD" sourceName="DKAAEB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">CLU2zTwYM7fw+HZQdeoyWKgyzty3fyQ51n6zfE9BtRo=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAAB50.GPD" sourceName="DKAAAB50.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">dj3RndcyIqf4G18v4iekMThJncFgDir43S9X2XYyepk=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file name="I386\DKAAGB51.GPD" sourceName="DKAAGB51.GPD" sourcePath="I386\" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">yhOmvp2A/6iUo0nuLutQAbewMbw03osFueMKvSQf44U=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <deployment xmlns="urn:schemas-microsoft-com:asm.v3" />
+</assembly>

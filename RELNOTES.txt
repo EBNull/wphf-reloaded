@@ -1,0 +1,45 @@
+Version 0.3.4 (2011-10-27)
+# added ODBC support
+# added russian language (thanks to Artyom E. Gerasimenko)
+
+
+Version 0.3.3 (2011-10-11)
+# added german language (thanks to Alex)
+
+
+Version 0.3.2 (2011-10-05)
+# fixed some Extended MAPI bugs
+# added support for number@name#subaddress syntax (just like the sendfax command line client)
+
+
+Version 0.3.1 (2011-06-16)
+# fixed a bug where multiple recipients were not handled correctly if fax numbers had spaces inside them
+# can read address book from Extended MAPI (Outlook)
+
+
+Version 0.3.0 (2011-05-27)
+# multi language
+# multiple recipients
+# delayed send
+# kill time
+
+
+Version 0.2.1 (2011-05-11)
+# the gui now popups over existing windows
+# resizable/iconizable window
+# some bugfixes
+
+
+Version 0.2.0 (2011-05-06)
+# address book is now in CSV format
+# location of address book is now configurable by the user
+# improved HylaFAX protocol: now uses Indy components and is much more tolerant to network errors (e.g. server down)
+# many bugfixes, complete code review, heavy use of protected code blocks (try...catch...finally)
+
+
+Version 0.1.1 (2011-04-28)
+# fixed a bug where the port monitor could hang the spooler during uninstall.
+
+
+Version 0.1.0 (2011-04-27)
+# first release.

@@ -1,0 +1,39 @@
+========================
+Notes about ODBC support
+========================
+
+Starting at release 0.3.4, Winprint HylaFAX Reloaded supports address book from ODBC data sources, thus giving you the ability to store your address book on a variety of databases.
+Note that ODBC support is still almost experimental. It has been tested with the following data sources: SQL Server, MySQL, Firebird, Excel.
+ODBC connection is read only. This means Winprint HylaFAX Reloaded won't be able to store new items into your database. I'm sure this is desirable for most system administrators.
+For those who need write access to the database, there are three opportunities:
+(1) download source code and do the modifications themselves
+(2) be patient (no timeline at all)
+(3) hire me
+
+
+----------------------
+-- Note about Excel --
+----------------------
+The columns containing the names and the fax numbers MUST be in text format.
+To read data from an Excel spreadsheet with ODBC, you must define a "Named Range" inside your spreadsheet.
+Have a look here to learn how to do this: http://spreadsheets.about.com/od/exceltips/qt/named_range.htm
+
+Example:
+Suppose you have a spreadsheet like the following:
+
+      A        B
+1  Name      Fax Number
+2  John      012345678
+3  Mary      876543210
+4  Bob       019283746
+...
+
+You can create a named range on A:B (which means the entire column A plus the entire column B) and name it, let's say, "AddrBook".
+Then you create an ODBC source (using ODBC administration tool) that points to your .xls file, and name it, let's say, "AddrBookDSN".
+The parameters for Winprint HylaFAX Reloaded are:
+Address book type  : ODBC
+DSN                : AddrBookDSN (our ODBC data source name)
+Username, Password : leave blank
+Table              : AddrBook    (our named range)
+Name field         : Name        (heading of column A)
+Fax field          : Fax Number  (heading of column B)

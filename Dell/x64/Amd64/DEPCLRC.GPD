@@ -1,0 +1,125 @@
+*% Copyright 2005 Samsung Electronics Inc,.
+*% All Rights Reserved.
+
+*%-------------------------------------------------------------------------
+*% Version Section
+*%-------------------------------------------------------------------------
+*GPDFileName: "DEPCLRC.GPD"
+*GPDSpecVersion: "1.0"
+*GPDFileVersion: "1.0"
+
+*%-------------------------------------------------------------------------
+*% Include Section
+*%-------------------------------------------------------------------------
+
+*CodePage: 1252      *% Windows 3.1 US (ANSI) code page
+
+*%-------------------------------------------------------------------------
+*% Macros section
+*%-------------------------------------------------------------------------
+
+*BlockMacro: DuplexConstraints
+{
+    *Constraints: Duplex.HORIZONTAL
+    *Constraints: Duplex.VERTICAL
+}
+
+*Macros: InstallableOptions
+{	
+	IDS_DUPLEXUNIT:  				RESDLL.DELLSTR.1
+	IDS_INSTALLED:                  RESDLL.DELLSTR.2                                                    
+	IDS_NOTINSTALLED:				RESDLL.DELLSTR.3
+	IDS_TRAY2:       				RESDLL.DELLSTR.4
+	IDS_HDD:         				RESDLL.DELLSTR.5
+	IDS_MEMORY:      				RESDLL.DELLSTR.6
+}
+
+*Macros: StdFeatureNames
+{
+	IDS_MPTRAY:      				RESDLL.DELLSTR.7
+	IDS_TRAY1:                      RESDLL.DELLSTR.8
+	IDS_MF:                         RESDLL.DELLSTR.9
+	IDS_COLORMODE:                  RESDLL.DELLSTR.10
+	IDS_GRAYSCALE:                  RESDLL.DELLSTR.11
+	IDS_COLOR:                      RESDLL.DELLSTR.12
+	IDS_RGBCOLOR:    				RESDLL.DELLSTR.13
+	IDS_DEFAULT:                    RESDLL.DELLSTR.14
+	IDS_VIVID:                      RESDLL.DELLSTR.15
+	IDS_DEVICE:                     RESDLL.DELLSTR.16
+	IDS_RDUPLEX:                    RESDLL.DELLSTR.17
+	IDS_COVERPAGE:                  RESDLL.DELLSTR.18
+	IDS_OFF:     					RESDLL.DELLSTR.19
+	IDS_ON:                         RESDLL.DELLSTR.20
+	IDS_IMAGEMODE:                  RESDLL.DELLSTR.21
+	IDS_PSETTING:                   RESDLL.DELLSTR.22
+	IDS_NORMAL:                     RESDLL.DELLSTR.23
+	IDS_TEXTENHAN:                  RESDLL.DELLSTR.24
+	IDS_TONERSAVE:                  RESDLL.DELLSTR.25
+	IDS_PRINTHOLD:                  RESDLL.DELLSTR.26
+	IDS_USERID:                     RESDLL.DELLSTR.27
+	IDS_JOBNAME:                    RESDLL.DELLSTR.28
+	IDS_PASSWD:                     RESDLL.DELLSTR.29
+	IDS_NONE:                       RESDLL.DELLSTR.30
+	IDS_1200R:                      RESDLL.DELLSTR.31
+	IDS_1200600R:                   RESDLL.DELLSTR.32
+	IDS_600R:                       RESDLL.DELLSTR.33
+	IDS_300R:                       RESDLL.DELLSTR.34
+}                                                        
+                                                         
+*Macros: MediaTypeNames                                  
+{                                                        
+	IDS_PDEFAULT:                   RESDLL.DELLSTR.35 
+	IDS_PLAIN:                      RESDLL.DELLSTR.36
+	IDS_THIN:                       RESDLL.DELLSTR.37
+	IDS_THICK:                      RESDLL.DELLSTR.38 
+	IDS_BOND:                       RESDLL.DELLSTR.39
+	IDS_COLORED:                    RESDLL.DELLSTR.40
+	IDS_CARDSTOCK:                  RESDLL.DELLSTR.41
+	IDS_LABELS:                     RESDLL.DELLSTR.42
+	IDS_TRANSPARENCY:               RESDLL.DELLSTR.43
+	IDS_ENV:                        RESDLL.DELLSTR.44
+	IDS_PREPRINTED:                 RESDLL.DELLSTR.45
+	IDS_RECYCLED:    				RESDLL.DELLSTR.46
+	IDS_COTTON:      				RESDLL.DELLSTR.47
+}
+
+*Macros: MediaSizeNames
+{
+	IDS_10ENV:    					RESDLL.DELLSTR.48
+	IDS_A4:                         RESDLL.DELLSTR.49
+	IDS_A3:                         RESDLL.DELLSTR.50
+	IDS_A5:                         RESDLL.DELLSTR.51
+	IDS_A6:                         RESDLL.DELLSTR.52
+	IDS_C5ENV:                      RESDLL.DELLSTR.53
+	IDS_C6ENV:                      RESDLL.DELLSTR.54
+	IDS_DLENV:                      RESDLL.DELLSTR.55
+	IDS_EXECUTIVE:                  RESDLL.DELLSTR.56
+	IDS_ISOB5:                      RESDLL.DELLSTR.57
+	IDS_B5JIS:                      RESDLL.DELLSTR.58
+	IDS_LEGAL:                      RESDLL.DELLSTR.59
+	IDS_LETTER:   					RESDLL.DELLSTR.60
+	IDS_MONARCH:                    RESDLL.DELLSTR.61
+	IDS_OFICIO:                     RESDLL.DELLSTR.62
+	IDS_USFOLIO:                    RESDLL.DELLSTR.63
+	IDS_STATEMENT:                  RESDLL.DELLSTR.64
+	IDS_B4:                         RESDLL.DELLSTR.65
+	IDS_TABLOID:                    RESDLL.DELLSTR.66
+	IDS_C4:                         RESDLL.DELLSTR.67
+	IDS_LEDGER:                     RESDLL.DELLSTR.68
+}                                                       
+*Macros: Additional                                  
+{                                                        
+	IDS_32MB:    	                RESDLL.DELLSTR.69 
+	IDS_48MB:       	            RESDLL.DELLSTR.70
+	IDS_64MB:           	        RESDLL.DELLSTR.71
+	IDS_96MB:               	    RESDLL.DELLSTR.72
+	IDS_160MB:                  	RESDLL.DELLSTR.73
+	IDS_288MB:                  	RESDLL.DELLSTR.74
+	IDS_IMGENHAN:               	RESDLL.DELLSTR.75
+	IDS_DARKNESS:					RESDLL.DELLSTR.76
+	IDS_LIGHT:						RESDLL.DELLSTR.77
+	IDS_DARK:						RESDLL.DELLSTR.78
+	IDS_REPRINT:					RESDLL.DELLSTR.79
+	IDS_SRT:						RESDLL.DELLSTR.80				
+}                                      
+                                                        
