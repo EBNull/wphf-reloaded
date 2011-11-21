@@ -1,0 +1,5 @@
+Win32/
+monitor/Win32
+*.vcproj.*.user
+*.ncb
+*.suo
