@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "stdafx.h"
 #include "port.h"
 #include "log.h"
+#include "ts.h"
 #include "..\common\autoclean.h"
 #include "..\common\defs.h"
 #include "..\common\monutils.h"
@@ -62,15 +63,18 @@ static BOOL WriteToPipe(HANDLE hPipe, LPCVOID lpBuffer, DWORD nNumberOfBytesToWr
 }
 
 //-------------------------------------------------------------------------------------
-static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine)
+static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine, DWORD sid)
 {
+	if (sid == INVALID_SESSION) {
+		g_pLog->Log(LOGLEVEL_ERRORS, L"Invalid session id 0x%0.8X for StartExe", sid);
+	}
 	typedef DWORD (WINAPI *PFNWTSGETACTIVECONSOLESESSIONID)();
 	typedef BOOL (WINAPI *PFNWTSQUERYUSERTOKEN)(ULONG, PHANDLE);
 
 	LPWSTR szCommand;
 	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
-	DWORD sid = 0, dwFlags = 0;
+	DWORD dwFlags = 0;
 	HANDLE htok = NULL, huser = NULL;
 	BOOL bIsXp, bRet;
 	LPVOID lpEnv = NULL;
@@ -105,8 +109,6 @@ static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine)
 		RevertToSelf();
 	}
 
-	if (!bIsXp || (sid = fnWTSGetActiveConsoleSessionId()) != 0xFFFFFFFF)
-	{
 		if (!bIsXp || fnWTSQueryUserToken(sid, &htok))
 		{
 			HANDLE hHeap = GetProcessHeap();
@@ -161,9 +163,6 @@ static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine)
 		}
 		else
 			g_pLog->Log(LOGLEVEL_ERRORS, L"fnWTSQueryUserToken failed: 0x%0.8X", GetLastError());
-	}
-	else
-		g_pLog->Log(LOGLEVEL_ERRORS, L"fnWTSGetActiveConsoleSessionId failed: 0x%0.8X", GetLastError());
 
 	if (huser)
 	{
@@ -787,6 +786,14 @@ BOOL CPort::EndJob()
 		CloseHandle(m_procInfo.hThread);
 	}
 */
+
+	DWORD sid = GetTargetSIDFromUsername(m_pJobInfo->pMachineName, m_pJobInfo->pUserName);
+	if (sid == INVALID_SESSION)
+	{
+		g_pLog->Log(LOGLEVEL_ERRORS, this, L"CPort::EndJob: GetTargetSIDFromUsername failed. Username %s not found in active session.", m_pJobInfo->pUserName);
+		return FALSE;
+	}
+
 	//eseguiamo le operazioni post-spooling
 	//modalità multi-documento
 	static LPCWSTR szPipeName = L"\\\\.\\pipe\\wphf";
@@ -846,7 +853,7 @@ BOOL CPort::EndJob()
 			//componiamo la linea di comando
 			swprintf_s(szCmdLine, len, L"\"%s\" \"%s\"", m_szFileName, JobTitle());
 			//esecuzione
-			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine);
+			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine, sid);
 
 			HeapFree(hHeap, 0, szCmdLine);
 		}
