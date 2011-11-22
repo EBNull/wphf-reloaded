@@ -443,6 +443,12 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpvReserved)
 	UNREFERENCED_PARAMETER(lpvReserved);
 	UNREFERENCED_PARAMETER(hinstDLL);
 
+	char* env_dbg_raw = getenv("WPHF_DEBUG");
+	DWORD loglevel = LOGLEVEL_NONE;
+	if (env_dbg_raw) {
+		loglevel = atoi(env_dbg_raw);
+	}
+
 	switch (dwReason)
 	{
 	case DLL_PROCESS_ATTACH:
@@ -455,10 +461,17 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpvReserved)
 //		DisableThreadLibraryCalls(hinstDLL);
 		g_pLog = new CMfmLog();
 		g_pLog->Log(LOGLEVEL_NONE, L"*** WPHFMON log start ***");
+		g_pLog->SetLogLevel(loglevel);
+		if (env_dbg_raw)
+		{
+			g_pLog->Log(LOGLEVEL_NONE, L"*** WPHFMON log level = %d ***", loglevel);
+		}
 		g_pPortList = new CPortList(szMonitorName, szDescription);
+
 #ifdef _DEBUG
 		//Force max log level in debug mode
 		g_pLog->SetLogLevel(LOGLEVEL_ALL);
+		g_pLog->Log(LOGLEVEL_NONE, L"*** WPHFMON log level = %d (debug) ***", LOGLEVEL_ALL);
 #endif
 		break;
 	case DLL_PROCESS_DETACH:
