@@ -787,10 +787,10 @@ BOOL CPort::EndJob()
 	}
 */
 
-	DWORD sid = GetTargetSIDFromUsername(m_pJobInfo->pMachineName, m_pJobInfo->pUserName);
+	DWORD sid = GetTargetSIDFromUsername(ComputerName(), UserName());
 	if (sid == INVALID_SESSION)
 	{
-		g_pLog->Log(LOGLEVEL_ERRORS, this, L"CPort::EndJob: GetTargetSIDFromUsername failed. Username %s not found in active session.", m_pJobInfo->pUserName);
+		g_pLog->Log(LOGLEVEL_ERRORS, this, L"CPort::EndJob: GetTargetSIDFromUsername failed. Username %s not found in active session.", UserName());
 		return FALSE;
 	}
 

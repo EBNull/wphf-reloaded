@@ -11,7 +11,7 @@ DWORD GetActiveConsoleSID()
 	// this function returns 0xFFFFFFFF."
 	return WTSGetActiveConsoleSessionId(); 
 }
-DWORD GetTargetSIDFromUsername(LPWSTR machineName, LPWSTR userName)
+DWORD GetTargetSIDFromUsername(LPCWSTR machineName, LPCWSTR userName)
 {
 	//TODO: Reject if machineName != local
 	UNREFERENCED_PARAMETER(machineName);

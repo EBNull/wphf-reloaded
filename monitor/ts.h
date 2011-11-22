@@ -25,6 +25,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 const DWORD INVALID_SESSION = 0xFFFFFFFF; //Returned when no session is found, and no session is connected to the console
 
 DWORD GetActiveConsoleSID();
-DWORD GetTargetSIDFromUsername(LPWSTR machineName, LPWSTR userName);
+DWORD GetTargetSIDFromUsername(LPCWSTR machineName, LPCWSTR userName);
+
+/*
+Notes on GetTargetSIDFromUsername:
+
+* machineName is not used. Theoretically this function could be extended to get the TS SID of a remote server,
+      but it is currently ignored.
+
+* userName is case sensitive.
+
+* Only active (connected) sessions are considered.
+
+* There may be more than one active session by a single username. This function will return the first one enumerated,
+      which may not be the one that initiated the print job. The session ID seems not to be part of the print job.
+
+*/
 
 #endif
