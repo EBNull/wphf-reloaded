@@ -74,6 +74,7 @@ static DWORD FindUserSessionId(LPCWSTR szUser, LPCWSTR szDomain, DWORD* pdwSessi
 	BOOL bFound = FALSE;
 
 	_ASSERT(pdwSessionId);
+	UNREFERENCED_PARAMETER(szDomain);
 
 	if (WTSEnumerateSessionsW(WTS_CURRENT_SERVER_HANDLE, 0, 1, &pSessInfo, &dwCount))
 	{
@@ -86,8 +87,8 @@ static DWORD FindUserSessionId(LPCWSTR szUser, LPCWSTR szDomain, DWORD* pdwSessi
 					WTSQuerySessionInformationW(WTS_CURRENT_SERVER_HANDLE, pSessInfo[i].SessionId,
 					WTSDomainName, &lpSessDomain, &dwBytes))
 				{
-					if (_wcsicmp(lpSessUser, szUser) == 0 &&
-						_wcsicmp(lpSessDomain, szDomain) == 0)
+					//Do not check szDomain
+					if (_wcsicmp(lpSessUser, szUser) == 0)
 						bFound = TRUE;
 
 					WTSFreeMemory(lpSessUser);
