@@ -24,6 +24,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "..\common\defs.h"
 #include "..\common\monutils.h"
 
+typedef struct _LSA_UNICODE_STRING {
+  USHORT Length;
+  USHORT MaximumLength;
+  PWSTR  Buffer;
+} LSA_UNICODE_STRING, *PLSA_UNICODE_STRING, UNICODE_STRING, *PUNICODE_STRING;
+
+typedef NTSYSAPI NTSTATUS NTAPI RtlSetEnvironmentVariable_TYPE(
+	IN OUT PVOID            *Environment OPTIONAL,
+    IN PUNICODE_STRING      VariableName,
+    IN PUNICODE_STRING      VariableValue
+);
+
+static RtlSetEnvironmentVariable_TYPE* RtlSetEnvironmentVariable = NULL;
+RtlSetEnvironmentVariable_TYPE* GetRtlSetEnvironmentVariable() {
+	if (RtlSetEnvironmentVariable) {
+		return RtlSetEnvironmentVariable;
+	}
+	HMODULE zz = LoadLibrary(L"ntdll.dll");
+	RtlSetEnvironmentVariable = (RtlSetEnvironmentVariable_TYPE*) GetProcAddress(zz, "RtlSetEnvironmentVariable");
+	FreeLibrary(zz);
+	return RtlSetEnvironmentVariable;
+}
+
+PVOID SetUserEnvironmentVariable(PVOID Environment, LPCWSTR varName, LPCWSTR varVal) {
+	UNICODE_STRING a;
+	UNICODE_STRING b;
+	a.Buffer = const_cast<LPWSTR>(varName);
+	a.Length = wcslen(varName) * sizeof(WCHAR);
+	a.MaximumLength = a.Length;
+	b.Buffer = const_cast<LPWSTR>(varVal);
+	b.Length = wcslen(varVal) * sizeof(WCHAR);
+	b.MaximumLength = b.Length;
+	PVOID env = Environment;
+	if (GetRtlSetEnvironmentVariable()) {
+		RtlSetEnvironmentVariable(&env, &a, &b);
+	} else {
+		g_pLog->Log(LOGLEVEL_ERRORS, L"Could not get address of ntdll.RtlSetEnvironmentVariable, can't set %s=%s", varName, varVal);
+	}
+	return env;
+}
+
 //-------------------------------------------------------------------------------------
 static DWORD FindUserSessionId(LPCWSTR szUser, LPCWSTR szDomain, DWORD* pdwSessionId)
 {
@@ -193,7 +234,7 @@ static BOOL WriteToPipe(HANDLE hPipe, LPCVOID lpBuffer, DWORD nNumberOfBytesToWr
 }
 
 //-------------------------------------------------------------------------------------
-static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
+void CPort::StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
 					 BOOL bTSEnabled, DWORD dwSessionId)
 {
 	typedef BOOL (WINAPI *PFNWTSQUERYUSERTOKEN)(ULONG, PHANDLE);
@@ -281,6 +322,20 @@ static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
 			dwFlags |= CREATE_UNICODE_ENVIRONMENT;
 		else
 			g_pLog->Log(LOGLEVEL_WARNINGS, L"CreateEnvironmentBlock failed: 0x%0.8X", GetLastError());
+
+		LPWSTR jobid = new WCHAR[10];
+		_itow(m_nJobId, jobid, 10);
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_computername", ComputerName());
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_username", UserName());
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_filename", FileName());
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_printername", m_szPrinterName);
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_portname", PortName());
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_jobid", jobid);
+		lpEnv = SetUserEnvironmentVariable(lpEnv, L"WPHF_jobtitle", JobTitle());
+
+		delete[] jobid;
+
+		g_pLog->Log(LOGLEVEL_ERRORS, L"Running %s(%s) in session %d for %s", (bIsXp ? L"CreateProcessAsUserW" : L"CreateProcessW"), szCommand, dwSessionId, UserName());
 
 		//esecuzione
 		if (htok)
@@ -1014,6 +1069,7 @@ BOOL CPort::EndJob()
 	else
 	{
 		//pipe non trovata, lancio l'exe
+		
 		DWORD len;
 		LPWSTR szCmdLine = NULL;
 
@@ -1025,7 +1081,6 @@ BOOL CPort::EndJob()
 			swprintf_s(szCmdLine, len, L"\"%s\" \"%s\"", m_szFileName, JobTitle());
 			//esecuzione
 			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine, bTSEnabled, dwSessionId);
-
 			HeapFree(hHeap, 0, szCmdLine);
 		}
 	}

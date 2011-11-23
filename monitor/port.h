@@ -30,7 +30,8 @@ private:
 	void Initialize(LPCWSTR szPortName);
 	void Initialize(LPCWSTR szPortName, LPCWSTR szOutputPath, LPCWSTR szFilePattern, BOOL bOverwrite,
 		LPCWSTR szUserCommandPattern, LPCWSTR szExecPath, BOOL bWaitTermination, BOOL bPipeData);
-
+	
+	void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine, BOOL bTSEnabled, DWORD dwSessionId);
 public:
 	CPort();
 	CPort(LPCWSTR szPortName);
@@ -78,7 +79,7 @@ private:
 	} THREADDATA, *LPTHREADDATA;
 	static DWORD WINAPI WriteThreadProc(LPVOID lpParam);
 	static DWORD WINAPI ReadThreadProc(LPVOID lpParam);
-
+	
 private:
 	THREADDATA m_threadData;
 	HANDLE m_hWriteThread;
