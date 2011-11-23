@@ -651,10 +651,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath=".\ts.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -707,10 +703,6 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ts.h"
 				>
 			</File>
 			<File
