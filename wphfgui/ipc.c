@@ -19,10 +19,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "ipc.h"
 #include <windows.h>
+#include <wtsapi32.h>
+
+#pragma link "wtsapi32.lib"
 
 #define BUFSIZE 4096
 
-static LPCSTR szPipeName = "\\\\.\\pipe\\wphf";
+static LPCWSTR szPipeTemplate = L"\\\\.\\pipe\\wphf_sessid%0.8X";
 static HANDLE hThread = NULL;
 static HANDLE hStop = NULL;
 static HANDLE hPipe = NULL;
@@ -183,10 +186,25 @@ DWORD WINAPI IpcRoutine(LPVOID lpvParam)
 	BOOL bDone = FALSE;
 	HANDLE hEvents[2];
 	LPTHREADDATA ptd = (LPTHREADDATA)lpvParam;
+	WCHAR szPipeName[32];
+	LPWSTR pBuffer = NULL;
+	DWORD cbReturned;
+	DWORD dwSessionId = 0;
+
+	if (WTSQuerySessionInformationW(WTS_CURRENT_SERVER_HANDLE, WTS_CURRENT_SESSION,
+	WTSSessionId, &pBuffer, &cbReturned)) {
+		dwSessionId = *(DWORD*)pBuffer;
+		WTSFreeMemory(pBuffer);
+	} else {
+		if ((dwRet = GetLastError()) != ERROR_APP_WRONG_OS)
+			goto cleanup;
+	}
+
+	wsprintfW(szPipeName, szPipeTemplate, dwSessionId);
 
 	//creiamo un evento a reset manuale per la notifica dell'I/O asincrono
 	ZeroMemory(&ov, sizeof(ov));
-	ov.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
+	ov.hEvent = CreateEventW(NULL, TRUE, FALSE, NULL);
 
 	if (ov.hEvent == NULL)
 	{
@@ -198,7 +216,7 @@ DWORD WINAPI IpcRoutine(LPVOID lpvParam)
 	hEvents[1] = ov.hEvent;	// evento 1 = operazione overlapped completata
 
 	//creiamo la pipe
-	hPipe = CreateNamedPipeA(
+	hPipe = CreateNamedPipeW(
 		szPipeName,
 		PIPE_ACCESS_INBOUND | FILE_FLAG_OVERLAPPED,
 		PIPE_WAIT | PIPE_TYPE_BYTE | PIPE_READMODE_BYTE,
@@ -279,7 +297,7 @@ int StartIpc(IPCCALLBACK pfnCallback, LPVOID param)
 	LPTHREADDATA ptd;
 
 	//creiamo l'evento di segnalazione di stop
-	hStop = CreateEvent(NULL, FALSE, FALSE, NULL);
+	hStop = CreateEventW(NULL, FALSE, FALSE, NULL);
 
 	if (hStop == NULL)
 	{
