@@ -32,6 +32,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <crtdbg.h>
 #include <userenv.h>
 #include <shlobj.h>
+#include <wtsapi32.h>
+#include <tlhelp32.h>
 
 #define LENGTHOF(x) (sizeof(x)/sizeof((x)[0]))
 

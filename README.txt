@@ -34,3 +34,4 @@ This software is released under the terms of the GNU GPL license. See http://www
 5. Bugs
 
 This software is in the beta stage. Many improvements must be done yet. If you find any bug or have suggestions, please use SourceForge support facilities to submit your report. Thank you. If you want to contribute, drop me a line.
+November 23, 2011 update: terminal services support, added in rel. 0.3.5, is not perfect yet. The big issue is: given a print job, from which desktop did that print job come from? The software uses a trick: enumerate all desktops (console plus all RDP connections) until one is found belonging to the same user that submitted the print job; then the GUI is executed on that desktop. The drawback is that if there are two or more sessions owned by the same user account, the GUI will appear on the first one it finds.

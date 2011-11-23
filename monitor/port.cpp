@@ -25,6 +25,137 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "..\common\monutils.h"
 
 //-------------------------------------------------------------------------------------
+static DWORD FindUserSessionId(LPCWSTR szUser, LPCWSTR szDomain, DWORD* pdwSessionId)
+{
+	PWTS_SESSION_INFOW pSessInfo;
+	DWORD dwCount, dwBytes, dwErr = 0;
+	LPWSTR lpSessUser, lpSessDomain;
+	BOOL bFound = FALSE;
+
+	_ASSERT(pdwSessionId);
+
+	if (WTSEnumerateSessionsW(WTS_CURRENT_SERVER_HANDLE, 0, 1, &pSessInfo, &dwCount))
+	{
+		for (DWORD i = 0; i < dwCount; i++)
+		{
+			if (pSessInfo[i].State == WTSActive)
+			{
+				if (WTSQuerySessionInformationW(WTS_CURRENT_SERVER_HANDLE, pSessInfo[i].SessionId,
+					WTSUserName, &lpSessUser, &dwBytes) &&
+					WTSQuerySessionInformationW(WTS_CURRENT_SERVER_HANDLE, pSessInfo[i].SessionId,
+					WTSDomainName, &lpSessDomain, &dwBytes))
+				{
+					if (_wcsicmp(lpSessUser, szUser) == 0 &&
+						_wcsicmp(lpSessDomain, szDomain) == 0)
+						bFound = TRUE;
+
+					WTSFreeMemory(lpSessUser);
+					WTSFreeMemory(lpSessDomain);
+
+					if (bFound)
+					{
+						*pdwSessionId = pSessInfo[i].SessionId;
+						break;
+					}
+				}
+				else
+				{
+					dwErr = GetLastError();
+					break;
+				}
+			}
+		}
+
+		WTSFreeMemory(pSessInfo);
+	}
+	else
+		dwErr = GetLastError();
+
+	return (bFound
+		? ERROR_SUCCESS
+		: (dwErr
+			? dwErr
+			: 0xFFFFFFFF));
+}
+
+//-------------------------------------------------------------------------------------
+static BOOL GetExplorerToken(DWORD dwSessionId, HANDLE* phToken)
+{
+	DWORD winlogonSessId, explorerPid = 0;
+	PROCESSENTRY32W procEntry;
+	BOOL bRet = FALSE;
+	HANDLE hProcess, hPToken, hPTokenDup;
+
+	_ASSERT(phToken);
+
+	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+
+	if (hSnap != INVALID_HANDLE_VALUE)
+	{
+		procEntry.dwSize = sizeof(PROCESSENTRY32W);
+
+		if (Process32FirstW(hSnap, &procEntry))
+		{
+			do
+			{
+				if (_wcsicmp(procEntry.szExeFile, L"explorer.exe") == 0)
+				{
+					if (ProcessIdToSessionId(procEntry.th32ProcessID, &winlogonSessId)
+						&& winlogonSessId == dwSessionId)
+					{
+						//found explorer.exe running into this session
+						explorerPid = procEntry.th32ProcessID;
+						break;
+					}
+				}
+			} while (Process32Next(hSnap, &procEntry));
+
+			if (explorerPid)
+			{
+				if ((hProcess = OpenProcess(MAXIMUM_ALLOWED, FALSE, explorerPid)) != NULL)
+				{
+					if (OpenProcessToken(hProcess,
+						TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY | TOKEN_ADJUST_SESSIONID | TOKEN_READ | TOKEN_WRITE,
+						&hPToken))
+					{
+						if (DuplicateTokenEx(hPToken, MAXIMUM_ALLOWED, NULL,
+							SecurityIdentification, TokenPrimary, &hPTokenDup))
+						{
+							if (SetTokenInformation(hPTokenDup,
+								TokenSessionId, (void*)dwSessionId, sizeof(DWORD)))
+							{
+								*phToken = hPTokenDup;
+								bRet = TRUE;
+							}
+							else
+								g_pLog->Log(LOGLEVEL_ERRORS, L"SetTokenInformation failed: 0x%0.8X", GetLastError());
+						}
+						else
+							g_pLog->Log(LOGLEVEL_ERRORS, L"DuplicateTokenEx failed: 0x%0.8X", GetLastError());
+
+						CloseHandle(hPToken);
+					}
+
+					CloseHandle(hProcess);
+				}
+				else
+					g_pLog->Log(LOGLEVEL_ERRORS, L"OpenProcessToken failed: 0x%0.8X", GetLastError());
+			}
+			else
+				g_pLog->Log(LOGLEVEL_ERRORS, L"Unable to find a suitable explorer.exe process");
+		}
+		else
+			g_pLog->Log(LOGLEVEL_ERRORS, L"Process32FirstW failed: 0x%0.8X", GetLastError());
+
+		CloseHandle(hSnap);
+	}
+	else
+		g_pLog->Log(LOGLEVEL_ERRORS, L"CreateToolhelp32Snapshot failed: 0x%0.8X", GetLastError());
+	
+	return bRet;
+}
+
+//-------------------------------------------------------------------------------------
 static BOOL WriteToPipe(HANDLE hPipe, LPCVOID lpBuffer, DWORD nNumberOfBytesToWrite,
 						DWORD dwMilliseconds, LPOVERLAPPED pOv)
 {
@@ -62,42 +193,38 @@ static BOOL WriteToPipe(HANDLE hPipe, LPCVOID lpBuffer, DWORD nNumberOfBytesToWr
 }
 
 //-------------------------------------------------------------------------------------
-static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine)
+static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
+					 BOOL bTSEnabled, DWORD dwSessionId)
 {
-	typedef DWORD (WINAPI *PFNWTSGETACTIVECONSOLESESSIONID)();
 	typedef BOOL (WINAPI *PFNWTSQUERYUSERTOKEN)(ULONG, PHANDLE);
 
 	LPWSTR szCommand;
 	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
-	DWORD sid = 0, dwFlags = 0;
+	DWORD dwFlags = 0;
 	HANDLE htok = NULL, huser = NULL;
 	BOOL bIsXp, bRet;
 	LPVOID lpEnv = NULL;
-	PFNWTSGETACTIVECONSOLESESSIONID fnWTSGetActiveConsoleSessionId = NULL;
 	PFNWTSQUERYUSERTOKEN fnWTSQueryUserToken = NULL;
+	BOOL bTokOk = FALSE;
 
 	bIsXp = Is_WinXPOrHigher();
 
 	if (bIsXp)
 	{
-		g_pLog->Log(LOGLEVEL_ALL, L"Running on Windows XP or higher: launch child process on user desktop");
+		g_pLog->Log(LOGLEVEL_ALL, L"Running on Windows XP or higher");
 
-		HMODULE hMod;
-		
-		hMod = GetModuleHandleW(L"kernel32.dll");
-		if (hMod)
-			fnWTSGetActiveConsoleSessionId = (PFNWTSGETACTIVECONSOLESESSIONID)GetProcAddress(hMod, "WTSGetActiveConsoleSessionId");
+		HMODULE hMod = GetModuleHandleW(L"wtsapi32.dll");
 
-		hMod = GetModuleHandleW(L"wtsapi32.dll");
 		if (!hMod)
 			hMod = LoadLibraryW(L"wtsapi32.dll");
+
 		if (hMod)
 			fnWTSQueryUserToken = (PFNWTSQUERYUSERTOKEN)GetProcAddress(hMod, "WTSQueryUserToken");
 
-		if (!fnWTSGetActiveConsoleSessionId || !fnWTSQueryUserToken)
+		if (!fnWTSQueryUserToken)
 		{
-			g_pLog->Log(LOGLEVEL_ERRORS, L"Unable to get WTSGetActiveConsoleSessionId and WTSQueryUserToken functions");
+			g_pLog->Log(LOGLEVEL_ERRORS, L"Unable to get WTSQueryUserToken function");
 			return;
 		}
 
@@ -105,65 +232,81 @@ static void StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine)
 		RevertToSelf();
 	}
 
-	if (!bIsXp || (sid = fnWTSGetActiveConsoleSessionId()) != 0xFFFFFFFF)
+	if (bTSEnabled)
 	{
-		if (!bIsXp || fnWTSQueryUserToken(sid, &htok))
+		//Terminal Server present
+		if (bIsXp)
 		{
-			HANDLE hHeap = GetProcessHeap();
-
-			if ((szCommand = (LPWSTR)HeapAlloc(hHeap, 0, MAXCOMMAND * sizeof(WCHAR))) == NULL)
-				return;
-
-			ZeroMemory(&si, sizeof(si));
-			ZeroMemory(&pi, sizeof(pi));
-
-			si.cb = sizeof(si);
-			si.lpDesktop = L"winsta0\\default";
-
-			//componiamo il comando eseguibile...
-			swprintf_s(szCommand, MAXCOMMAND, L"\"%s", szWorkingDir);
-			size_t pos = wcslen(szCommand);
-			if (pos == 0 || szCommand[pos - 1] != L'\\')
-				wcscat_s(szCommand, MAXCOMMAND, L"\\");
-			wcscat_s(szCommand, MAXCOMMAND, szExeName);
-			wcscat_s(szCommand, MAXCOMMAND, L"\" ");
-			wcscat_s(szCommand, MAXCOMMAND, szCmdLine);
-
-			//creazione environment
-			if (CreateEnvironmentBlock(&lpEnv, htok, FALSE))
-				dwFlags |= CREATE_UNICODE_ENVIRONMENT;
-			else
-				g_pLog->Log(LOGLEVEL_WARNINGS, L"CreateEnvironmentBlock failed: 0x%0.8X", GetLastError());
-
-			//esecuzione
-			if (bIsXp)
-				bRet = CreateProcessAsUserW(htok, NULL, szCommand, NULL,
-				NULL, FALSE, dwFlags, lpEnv, szWorkingDir, &si, &pi);
-			else
-				bRet = CreateProcessW(NULL, szCommand, NULL,
-				NULL, FALSE, dwFlags, lpEnv, szWorkingDir, &si, &pi);
-
-			if (bRet)
-			{
-				CloseHandle(pi.hProcess);
-				CloseHandle(pi.hThread);
-			}
-			else
-				g_pLog->Log(LOGLEVEL_ERRORS, L"%s failed: 0x%0.8X", (bIsXp ? L"CreateProcessAsUserW" : L"CreateProcessW"), GetLastError());
-
-			//distruzione environment
-			if (lpEnv)
-				DestroyEnvironmentBlock(lpEnv);
-
-			HeapFree(hHeap, 0, szCommand);
-
-			CloseHandle(htok);
+			//we have WTSQueryUserToken
+			if ((bTokOk = fnWTSQueryUserToken(dwSessionId, &htok)) == FALSE)
+				g_pLog->Log(LOGLEVEL_ERRORS, L"fnWTSQueryUserToken failed: 0x%0.8X", GetLastError());
 		}
 		else
-			g_pLog->Log(LOGLEVEL_ERRORS, L"fnWTSQueryUserToken failed: 0x%0.8X", GetLastError());
+		{
+			//we DON'T have WTSQueryUserToken; look for a running
+			//explorer.exe into this session, and grab token from it
+			bTokOk = GetExplorerToken(dwSessionId, &htok);
+		}
 	}
 	else
-		g_pLog->Log(LOGLEVEL_ERRORS, L"fnWTSGetActiveConsoleSessionId failed: 0x%0.8X", GetLastError());
+	{
+		//Windows 2000 Pro or Windows 2000 Server w/o TS
+		bTokOk = TRUE;
+	}
+
+	if (bTokOk)
+	{
+		HANDLE hHeap = GetProcessHeap();
+
+		if ((szCommand = (LPWSTR)HeapAlloc(hHeap, 0, MAXCOMMAND * sizeof(WCHAR))) == NULL)
+			return;
+
+		ZeroMemory(&si, sizeof(si));
+		ZeroMemory(&pi, sizeof(pi));
+
+		si.cb = sizeof(si);
+		si.lpDesktop = L"winsta0\\default";
+
+		//componiamo il comando eseguibile...
+		swprintf_s(szCommand, MAXCOMMAND, L"\"%s", szWorkingDir);
+		size_t pos = wcslen(szCommand);
+		if (pos == 0 || szCommand[pos - 1] != L'\\')
+			wcscat_s(szCommand, MAXCOMMAND, L"\\");
+		wcscat_s(szCommand, MAXCOMMAND, szExeName);
+		wcscat_s(szCommand, MAXCOMMAND, L"\" ");
+		wcscat_s(szCommand, MAXCOMMAND, szCmdLine);
+
+		//creazione environment
+		if (CreateEnvironmentBlock(&lpEnv, htok, FALSE))
+			dwFlags |= CREATE_UNICODE_ENVIRONMENT;
+		else
+			g_pLog->Log(LOGLEVEL_WARNINGS, L"CreateEnvironmentBlock failed: 0x%0.8X", GetLastError());
+
+		//esecuzione
+		if (htok)
+			bRet = CreateProcessAsUserW(htok, NULL, szCommand, NULL,
+			NULL, FALSE, dwFlags, lpEnv, szWorkingDir, &si, &pi);
+		else
+			bRet = CreateProcessW(NULL, szCommand, NULL,
+			NULL, FALSE, dwFlags, lpEnv, szWorkingDir, &si, &pi);
+
+		if (bRet)
+		{
+			CloseHandle(pi.hProcess);
+			CloseHandle(pi.hThread);
+		}
+		else
+			g_pLog->Log(LOGLEVEL_ERRORS, L"%s failed: 0x%0.8X", (htok ? L"CreateProcessAsUserW" : L"CreateProcessW"), GetLastError());
+
+		//distruzione environment
+		if (lpEnv)
+			DestroyEnvironmentBlock(lpEnv);
+
+		HeapFree(hHeap, 0, szCommand);
+
+		if (htok)
+			CloseHandle(htok);
+	}
 
 	if (huser)
 	{
@@ -789,8 +932,43 @@ BOOL CPort::EndJob()
 */
 	//eseguiamo le operazioni post-spooling
 	//modalità multi-documento
-	static LPCWSTR szPipeName = L"\\\\.\\pipe\\wphf";
+	static LPCWSTR szPipeTemplate = L"\\\\.\\pipe\\wphf_sessid%0.8X";
+	WCHAR szPipeName[32];
 	HANDLE hPipe = INVALID_HANDLE_VALUE;
+	BOOL bTSEnabled = FALSE;
+	DWORD dwSessionId = 0, dwRet;
+
+	dwRet = FindUserSessionId(UserName(), ComputerName(), &dwSessionId);
+
+	if (dwRet == ERROR_SUCCESS)
+		bTSEnabled = TRUE;
+	else if (dwRet != ERROR_APP_WRONG_OS)
+	{
+		if (Is_WinXPOrHigher())
+		{
+			typedef DWORD (WINAPI *PFNWTSGETACTIVECONSOLESESSIONID)(void);
+			PFNWTSGETACTIVECONSOLESESSIONID fnWTSGetActiveConsoleSessionId;
+
+			HMODULE hMod = GetModuleHandleW(L"kernel32.dll");
+
+			if (!hMod)
+				return FALSE;
+
+			fnWTSGetActiveConsoleSessionId = (PFNWTSGETACTIVECONSOLESESSIONID)GetProcAddress(hMod, "WTSGetActiveConsoleSessionId");
+
+			if (!fnWTSGetActiveConsoleSessionId)
+				return FALSE;
+
+			if ((dwSessionId = fnWTSGetActiveConsoleSessionId()) == 0xFFFFFFFF)
+				return FALSE;
+
+			bTSEnabled = TRUE;
+		}
+		else
+			return FALSE;
+	}
+
+	swprintf_s(szPipeName, LENGTHOF(szPipeName), szPipeTemplate, dwSessionId);
 
 	//cerchiamo la pipe...
 	hPipe = CreateFileW(
@@ -846,7 +1024,7 @@ BOOL CPort::EndJob()
 			//componiamo la linea di comando
 			swprintf_s(szCmdLine, len, L"\"%s\" \"%s\"", m_szFileName, JobTitle());
 			//esecuzione
-			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine);
+			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine, bTSEnabled, dwSessionId);
 
 			HeapFree(hHeap, 0, szCmdLine);
 		}

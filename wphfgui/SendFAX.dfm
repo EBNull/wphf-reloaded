@@ -129,7 +129,7 @@ object FAXSend: TFAXSend
       Width = 45
       Height = 13
       Anchors = [akTop, akRight]
-      Caption = 'rel. 0.3.4'
+      Caption = 'rel. 0.3.5'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGray
       Font.Height = -11
