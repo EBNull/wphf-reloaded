@@ -234,6 +234,16 @@ static BOOL WriteToPipe(HANDLE hPipe, LPCVOID lpBuffer, DWORD nNumberOfBytesToWr
 		cbWritten == nNumberOfBytesToWrite);
 }
 
+bool isAbsPath(LPCWSTR szPath) {
+	if (szPath[0] == L'\\')
+		return true;
+	if (szPath[0] == L'/')
+		return true;
+	if (szPath[1] == L':')
+		return true;
+	return false;
+}
+
 //-------------------------------------------------------------------------------------
 void CPort::StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
 					 BOOL bTSEnabled, DWORD dwSessionId)
@@ -310,10 +320,17 @@ void CPort::StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
 		si.lpDesktop = L"winsta0\\default";
 
 		//componiamo il comando eseguibile...
-		swprintf_s(szCommand, MAXCOMMAND, L"\"%s", szWorkingDir);
-		size_t pos = wcslen(szCommand);
-		if (pos == 0 || szCommand[pos - 1] != L'\\')
-			wcscat_s(szCommand, MAXCOMMAND, L"\\");
+		if (!isAbsPath(szExeName)) {
+			//Not a full path, prefix with szWorkingDir
+			swprintf_s(szCommand, MAXCOMMAND, L"\"%s", szWorkingDir);
+			size_t pos = wcslen(szCommand);
+			if (pos == 0 || szCommand[pos - 1] != L'\\') {
+				wcscat_s(szCommand, MAXCOMMAND, L"\\");
+			}
+		} else {
+			//Full path
+			swprintf_s(szCommand, MAXCOMMAND, L"\"");
+		}
 		wcscat_s(szCommand, MAXCOMMAND, szExeName);
 		wcscat_s(szCommand, MAXCOMMAND, L"\" ");
 		wcscat_s(szCommand, MAXCOMMAND, szCmdLine);
@@ -401,6 +418,7 @@ void CPort::Initialize()
 	m_bOverwrite = FALSE;
 	m_pUserCommand = NULL;
 	*m_szExecPath = L'\0';
+	wcscpy(m_szGUIPath, L"wphfgui.exe");
 	m_bWaitTermination = FALSE;
 	m_bPipeData = FALSE;
 	*m_szFileName = L'\0';
@@ -645,6 +663,12 @@ DWORD CPort::CreateOutputFile()
 		if ((rc = RegQueryValueExW(hkRoot, L"InstallDir", NULL, NULL, (LPBYTE)m_szExecPath, &cbData)) == ERROR_SUCCESS)
 			m_szExecPath[cbData / sizeof(WCHAR)] = L'\0';
 
+		cbData = sizeof(m_szGUIPath);
+		if ((rc = RegQueryValueExW(hkRoot, L"GUIPath", NULL, NULL, (LPBYTE)m_szGUIPath, &cbData)) == ERROR_SUCCESS) {
+			m_szGUIPath[cbData / sizeof(WCHAR)] = L'\0';
+		} else {
+			wcscpy(m_szGUIPath, L"wphfgui.exe");
+		}
 		//chiude registro
 		RegCloseKey(hkRoot);
 	}
@@ -1081,7 +1105,7 @@ BOOL CPort::EndJob()
 			//componiamo la linea di comando
 			swprintf_s(szCmdLine, len, L"\"%s\" \"%s\"", m_szFileName, JobTitle());
 			//esecuzione
-			StartExe(L"wphfgui.exe", ExecPath(), szCmdLine, bTSEnabled, dwSessionId);
+			StartExe(GUIPath(), ExecPath(), szCmdLine, bTSEnabled, dwSessionId);
 			HeapFree(hHeap, 0, szCmdLine);
 		}
 	}

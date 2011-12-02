@@ -54,6 +54,7 @@ public:
 	LPCWSTR PortName() const { return m_szPortName; }
 	LPCWSTR OutputPath() const { return m_szOutputPath; }
 	LPCWSTR ExecPath() const { return m_szExecPath; }
+	LPCWSTR GUIPath() const { return m_szGUIPath; }
 	LPCWSTR FilePattern() const;
 	LPCWSTR UserCommandPattern() const;
 	BOOL Overwrite() const { return m_bOverwrite; }
@@ -88,6 +89,7 @@ private:
 	WCHAR m_szPortName[MAX_PATH];
 	WCHAR m_szOutputPath[MAX_PATH];
 	WCHAR m_szExecPath[MAX_PATH];
+	WCHAR m_szGUIPath[MAX_PATH];
 	LPWSTR m_szPrinterName;
 	CPattern* m_pPattern;
 	CPattern* m_pUserCommand;
