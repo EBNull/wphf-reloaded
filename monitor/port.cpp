@@ -308,6 +308,8 @@ void CPort::StartExe(LPCWSTR szExeName, LPCWSTR szWorkingDir, LPWSTR szCmdLine,
 
 		si.cb = sizeof(si);
 		si.lpDesktop = L"winsta0\\default";
+		si.dwFlags |= STARTF_USESHOWWINDOW;
+		si.wShowWindow = SW_SHOWNORMAL;
 
 		//componiamo il comando eseguibile...
 		swprintf_s(szCommand, MAXCOMMAND, L"\"%s", szWorkingDir);
